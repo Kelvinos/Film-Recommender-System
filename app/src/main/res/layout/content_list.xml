@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:orientation="vertical"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-app:layout_behavior="@string/appbar_scrolling_view_behavior"
-tools:showIn="@layout/activity_my"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_my"
     android:weightSum="1">
 
     <LinearLayout
@@ -58,13 +58,6 @@ tools:showIn="@layout/activity_my"
             android:layout_width="match_parent"
             android:layout_height="39dp" />
 
-        <EditText
-            android:layout_width="224dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:layout_gravity="center_horizontal"
-            android:text="Enter Film" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -74,20 +67,14 @@ tools:showIn="@layout/activity_my"
         android:weightSum="1"
         android:layout_gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="73dp"
-            android:layout_height="44dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Filter 1"
-            android:id="@+id/textView2"
-            android:layout_weight="0.06" />
+    </LinearLayout>
 
-        <Spinner
-            android:layout_width="139dp"
-            android:layout_height="41dp"
-            android:id="@+id/spinner1"
-            android:background="@android:drawable/btn_dropdown"
-            android:spinnerMode="dropdown" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="220dp"
+        android:layout_height="58dp"
+        android:weightSum="1"
+        android:layout_gravity="center_horizontal" >
 
     </LinearLayout>
 
@@ -98,13 +85,6 @@ tools:showIn="@layout/activity_my"
         android:weightSum="1"
         android:layout_gravity="center_horizontal" >
 
-        <TextView
-            android:layout_width="73dp"
-            android:layout_height="44dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Filter 2"
-            android:id="@+id/textView3"
-            android:layout_weight="0.06" />
     </LinearLayout>
 
     <LinearLayout
@@ -114,29 +94,6 @@ tools:showIn="@layout/activity_my"
         android:weightSum="1"
         android:layout_gravity="center_horizontal" >
 
-        <TextView
-            android:layout_width="73dp"
-            android:layout_height="44dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Filter 3"
-            android:id="@+id/textView4"
-            android:layout_weight="0.06" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="220dp"
-        android:layout_height="58dp"
-        android:weightSum="1"
-        android:layout_gravity="center_horizontal" >
-
-        <TextView
-            android:layout_width="73dp"
-            android:layout_height="44dp"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Filter 4"
-            android:id="@+id/textView5"
-            android:layout_weight="0.06" />
     </LinearLayout>
 
     <FrameLayout
@@ -146,10 +103,9 @@ tools:showIn="@layout/activity_my"
         <Button
             android:layout_width="69dp"
             android:layout_height="wrap_content"
-            android:text="Go"
+            android:text="Back"
             android:id="@+id/button3"
-            android:layout_gravity="center"
-            android:onClick="SearchFilms"/>
+            android:layout_gravity="center_horizontal|bottom" />
     </FrameLayout>
 
 </LinearLayout>

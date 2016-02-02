@@ -1,5 +1,6 @@
 package com.example.kelvin_pc.film;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 public class Home extends AppCompatActivity {
 
@@ -26,6 +29,13 @@ public class Home extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        Spinner dropdown = (Spinner) findViewById(R.id.spinner1);
+        String[] items = new String[]{"A", "B", "C"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+
+
     }
 
     @Override
@@ -49,4 +59,11 @@ public class Home extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // When the search button is pressed run this method
+    public void SearchFilms(View view) {
+        Intent intent = new Intent(this, List.class);
+        startActivity(intent);
+    }
+
 }
