@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <GridLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:columnCount="2"
+        android:rowCount="1">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="161dp"
+            android:layout_height="161dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_column="0"
+            android:layout_gravity="left|top"
+            android:layout_row="0"
+            android:src="@drawable/icon_image" />
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent" >
+
+            <GridLayout
+                android:layout_width="210dp"
+                android:layout_height="176dp"
+                android:layout_column="1"
+                android:layout_row="0"
+                android:columnCount="1"
+                android:rowCount="3">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="59dp"
+                    android:orientation="vertical"
+                    android:textAlignment="center">
+
+                    <TextView
+                        android:id="@+id/text_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/text_description"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignStart="@+id/text_description"
+                        android:layout_column="2"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="19dp"
+                        android:layout_row="0"
+                        android:text="Title"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="61dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/text_genre"
+                        android:layout_alignRight="@+id/text_genre"
+                        android:layout_below="@+id/text_title"
+                        android:layout_column="2"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_row="2"
+                        android:text="Description"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <GridLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:rowCount="1"
+                        android:columnCount="4">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal">
+
+                            <TextView
+                                android:id="@+id/textView20"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/text_description"
+                                android:layout_toEndOf="@+id/imageView"
+                                android:layout_toRightOf="@+id/imageView"
+                                android:text="Genre"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_row="0"
+                                android:layout_column="0" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal">
+
+                            <TextView
+                                android:id="@+id/text_genre"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/text_description"
+                                android:layout_marginLeft="22dp"
+                                android:layout_marginStart="22dp"
+                                android:layout_toEndOf="@+id/textView9"
+                                android:layout_toRightOf="@+id/textView9"
+                                android:text="Crime"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_row="0"
+                                android:layout_column="1"
+                                android:layout_gravity="center_horizontal" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:id="@+id/textView21"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/text_description"
+                                android:layout_column="2"
+                                android:layout_marginLeft="22dp"
+                                android:layout_marginStart="22dp"
+                                android:layout_row="0"
+                                android:layout_toEndOf="@+id/text_genre"
+                                android:layout_toRightOf="@+id/text_genre"
+                                android:text="Rating"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_gravity="center_horizontal" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:id="@+id/text_rating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/text_description"
+                                android:layout_marginLeft="17dp"
+                                android:layout_marginStart="17dp"
+                                android:layout_toEndOf="@+id/rating"
+                                android:layout_toRightOf="@+id/rating"
+                                android:text="00"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:layout_gravity="right"
+                                android:layout_row="0"
+                                android:layout_column="3" />
+                        </LinearLayout>
+
+                    </GridLayout>
+
+                </LinearLayout>
+            </GridLayout>
+        </LinearLayout>
+
+    </GridLayout>
+</LinearLayout>

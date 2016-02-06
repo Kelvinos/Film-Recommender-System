@@ -2,55 +2,24 @@ package com.example.kelvin_pc.film;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.support.v7.widget.Toolbar;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
-public class Home extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class Home extends BaseActivity implements AdapterView.OnItemSelectedListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setUp(R.layout.activity_home);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
 
         setSpinners();
-
         // Stop keyboard auto popping up at the start
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (item.getItemId()) {
-            case R.id.action_account:
-                Login();
-                return true;
-            case R.id.action_settings:
-                Settings();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
@@ -68,15 +37,6 @@ public class Home extends AppCompatActivity implements AdapterView.OnItemSelecte
         startActivity(intent);
     }
 
-    public void Login() {
-        Intent intent = new Intent(this, Login.class);
-        startActivity(intent);
-    }
-
-    public void Settings() {
-        Intent intent = new Intent(this, Settings.class);
-        startActivity(intent);
-    }
 
     public void setSpinners() {
         // Create genre spinner

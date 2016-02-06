@@ -1,19 +1,29 @@
 package com.example.kelvin_pc.film;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.content.Intent;
-import android.support.v7.widget.Toolbar;
+import android.widget.ListView;
 
-public class FilmList extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class FilmList extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setUp(R.layout.activity_filmlist);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filmlist);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
 
+        ArrayList<Film> films = new ArrayList<>();
+        films.add(new Film("Goodfellas", "american crime", "crime", "9"));
+        films.add(new Film("Toy story", "disney animation", "animation", "8"));
+        films.add(new Film("Avengers", "action fighting superheroes", "action", "7"));
+        films.add(new Film("Toy story", "disney animation", "animation", "8"));
+        films.add(new Film("Avengers", "action fighting superheroes", "action", "7"));
+
+        ListAdapter la = new ListAdapter(this, films);
+        ListView lv = (ListView) findViewById(R.id.listView);
+
+        lv.setAdapter(la);
     }
+
 
 }
