@@ -5,10 +5,18 @@
     tools:context=".Home">
 
     <item
+        android:id="@+id/action_home"
+        android:orderInCategory="200"
+        android:title="Home"
+        android:icon="@drawable/icon_search"
+        app:showAsAction="ifRoom">
+    </item>
+
+    <item
         android:id="@+id/action_account"
         android:orderInCategory="200"
         android:title="Account"
-        android:icon="@drawable/icon_account"
+        android:icon="@drawable/icon_account_circle"
         app:showAsAction="ifRoom">
     </item>
 
@@ -18,7 +26,6 @@
         android:title="Settings"
         android:icon="@drawable/icon_settings"
         app:showAsAction="ifRoom">
-
     </item>
 
 </menu>

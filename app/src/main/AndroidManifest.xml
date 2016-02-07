@@ -32,6 +32,10 @@
         <activity
             android:name=".Settings"
             android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FilmDetails"
+            android:label="@string/title_activity_film_details"
             android:theme="@style/AppTheme"></activity>
     </application>
 

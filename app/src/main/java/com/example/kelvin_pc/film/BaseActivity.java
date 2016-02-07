@@ -41,9 +41,17 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.action_settings:
                 Settings();
                 return true;
+            case R.id.action_home:
+                Home();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void Home() {
+        Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
     }
 
     public void Login() {
