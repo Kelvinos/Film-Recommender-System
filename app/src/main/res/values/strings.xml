@@ -78,6 +78,10 @@
         <item>60</item>
     </string-array>
 
+    <string name="help">This application works by suggesting films based on the requirements set by the user. A user can
+    then rate films they like and dislike. Based on these rating the application applies a learning algorithm to suggest
+    films similar to the user\'s interests. These can be found in the account section.</string>
+
     <string name="title_activity_login">Login</string>
     <string name="title_activity_register">Register</string>
     <string name="title_activity_settings">Settings</string>

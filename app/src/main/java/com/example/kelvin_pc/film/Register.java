@@ -8,20 +8,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 
-public class Register extends AppCompatActivity {
+public class Register extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setUp(R.layout.activity_register);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_home, menu);
-        return true;
-    }
 
 }

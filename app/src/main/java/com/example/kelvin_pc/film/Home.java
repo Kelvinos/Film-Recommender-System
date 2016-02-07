@@ -16,8 +16,6 @@ public class Home extends BaseActivity implements AdapterView.OnItemSelectedList
         super.onCreate(savedInstanceState);
 
         setSpinners();
-        // Stop keyboard auto popping up at the start
-        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
 

@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 
 public class BaseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -24,6 +25,8 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
+        // Stop keyboard auto popping up at the start
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
     @Override
