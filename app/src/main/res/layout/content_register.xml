@@ -90,7 +90,7 @@
                 android:text="Confirm"
                 android:id="@+id/button"
                 android:layout_gravity="center_horizontal"
-                android:onClick="HomePage"/>
+                android:onClick="Login"/>
 
         </LinearLayout>
 

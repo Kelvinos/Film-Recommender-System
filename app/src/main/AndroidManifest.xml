@@ -36,6 +36,22 @@
         <activity
             android:name=".FilmDetails"
             android:label="@string/title_activity_film_details"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Account"
+            android:label="@string/title_activity_account"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Rated"
+            android:label="@string/title_activity_rated"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Recommendations"
+            android:label="@string/title_activity_recommendations"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".Profile"
+            android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme"></activity>
     </application>
 

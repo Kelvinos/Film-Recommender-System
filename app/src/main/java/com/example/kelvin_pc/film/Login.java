@@ -18,6 +18,11 @@ public class Login extends BaseActivity {
         startActivity(intent);
     }
 
+    public void Login(View view) {
+        Intent intent = new Intent(this, Account.class);
+        startActivity(intent);
+    }
+
     public void register(View view) {
         Intent intent = new Intent(this, Register.class);
         startActivity(intent);
