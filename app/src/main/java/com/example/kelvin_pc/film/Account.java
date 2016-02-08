@@ -27,18 +27,32 @@ public class Account extends BaseActivity {
         ratedItems.add("Film 1 - Good");
         ratedItems.add("Film 2 - Bad");
         ratedItems.add("Film 3 - Good");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ratedItems);
+        ratedItems.add("Film 1 - Good");
+        ratedItems.add("Film 2 - Bad");
+        ratedItems.add("Film 3 - Good");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list, ratedItems);
         ListView lv = (ListView) findViewById(R.id.list_recently_rated);
+        lv.setVerticalScrollBarEnabled(false);
+        lv.setFocusable(false);
         lv.setAdapter(adapter);
     }
 
     public void recommendationsList() {
+        // Films from film list
+        Bundle b = getIntent().getExtras();
+        ArrayList<Film> films = b.getParcelable("film_array");
+
         ArrayList<String> recommendations = new ArrayList<>();
         recommendations.add("Film 7");
         recommendations.add("Film 8");
         recommendations.add("Film 9");
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, recommendations);
+        recommendations.add("Film 7");
+        recommendations.add("Film 8");
+        recommendations.add("Film 9");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list, recommendations);
         ListView lv = (ListView) findViewById(R.id.list_recommendations);
+        lv.setVerticalScrollBarEnabled(false);
+        lv.setFocusable(false);
         lv.setAdapter(adapter);
     }
 

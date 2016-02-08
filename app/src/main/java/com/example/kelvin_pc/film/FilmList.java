@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FilmList extends BaseActivity {
 

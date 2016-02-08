@@ -1,11 +1,15 @@
 package com.example.kelvin_pc.film;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import java.io.FileOutputStream;
 
 public class FilmDetails extends BaseActivity {
 
     private Film film;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,27 @@ public class FilmDetails extends BaseActivity {
         description.setText(film.getDescription());
         genre.setText(film.getGenre());
         rating.setText(film.getRating());
+
+    }
+
+    // Rate film good
+    public void RateGood() {
+        writeRating(film, 1);
+    }
+
+    // Rate film bad
+    public void RateBad() {
+        writeRating(film, 0);
+    }
+
+    // Write rating to a file
+    public void writeRating(Film film, Integer rating) {
+        String FILENAME = "ratings";
+        FileOutputStream fos;
+        try {
+            fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+//            fos.write();
+        } catch (Exception e) {}
 
     }
 
