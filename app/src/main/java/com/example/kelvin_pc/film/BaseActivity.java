@@ -39,7 +39,7 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_account:
-                Login();
+                Account();
                 return true;
             case R.id.action_settings:
                 Settings();
@@ -54,6 +54,11 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void Home() {
         Intent intent = new Intent(this, Home.class);
+        startActivity(intent);
+    }
+
+    public void Account() {
+        Intent intent = new Intent(this, Account.class);
         startActivity(intent);
     }
 

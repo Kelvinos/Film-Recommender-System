@@ -4,53 +4,44 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <GridLayout
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:columnCount="2"
-        android:rowCount="1">
+        android:weightSum="1">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="161dp"
-            android:layout_height="161dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_column="0"
-            android:layout_gravity="left|top"
-            android:layout_row="0"
-            android:src="@drawable/icon_image" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="204dp"
+            android:layout_weight="1.03">
+
+            <ImageView
+                android:id="@+id/image_poster"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
-            android:layout_height="fill_parent" >
+            android:layout_height="match_parent"
+            android:weightSum="1"
+            android:orientation="horizontal">
 
-            <GridLayout
-                android:layout_width="215dp"
-                android:layout_height="wrap_content"
-                android:layout_column="1"
-                android:layout_row="0"
-                android:columnCount="1"
-                android:rowCount="4">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="200dp"
+                android:layout_height="match_parent">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="59dp"
-                    android:orientation="vertical"
-                    android:textAlignment="center">
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/text_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/text_description"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignStart="@+id/text_description"
-                        android:layout_column="2"
                         android:layout_gravity="center"
                         android:layout_marginTop="19dp"
                         android:layout_row="0"
@@ -84,11 +75,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <GridLayout
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:rowCount="1"
-                        android:columnCount="2">
+                        android:layout_height="match_parent">
 
                         <LinearLayout
                             android:orientation="horizontal"
@@ -101,8 +91,8 @@
                                 android:layout_width="65dp"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/text_description"
-                                android:layout_toEndOf="@+id/imageView"
-                                android:layout_toRightOf="@+id/imageView"
+                                android:layout_toEndOf="@+id/image_poster"
+                                android:layout_toRightOf="@+id/image_poster"
                                 android:text="Genre"
                                 android:textStyle="bold"
                                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -133,8 +123,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_weight="1.64" />
                         </LinearLayout>
-
-                    </GridLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -143,11 +132,10 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
 
-                    <GridLayout
+                    <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:rowCount="1"
-                        android:columnCount="2" >
+                        android:layout_height="match_parent">
 
                         <LinearLayout
                             android:orientation="horizontal"
@@ -190,11 +178,9 @@
                                 android:layout_row="0"
                                 android:layout_column="3" />
                         </LinearLayout>
-
-                    </GridLayout>
+                    </LinearLayout>
                 </LinearLayout>
-            </GridLayout>
+            </LinearLayout>
         </LinearLayout>
-
-    </GridLayout>
+    </LinearLayout>
 </LinearLayout>

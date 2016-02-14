@@ -3,12 +3,13 @@ package com.example.kelvin_pc.film;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 public class Home extends BaseActivity implements AdapterView.OnItemSelectedListener{
+
+    private Spinner genre, yearS, yearE, ratingS, ratingE, runS, runE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,39 +19,34 @@ public class Home extends BaseActivity implements AdapterView.OnItemSelectedList
         setSpinners();
     }
 
-
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
-        // An item was selected. You can retrieve the selected item using
-        // parent.getItemAtPosition(pos)
-    }
-
-    public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
-    }
-
     // When the search button is pressed run this method
     public void SearchFilms(View view) {
         Intent intent = new Intent(this, FilmList.class);
+        intent.putExtra(getString(R.string.genre), genre.getSelectedItem().toString());
+        intent.putExtra(getString(R.string.year_start), yearS.getSelectedItem().toString());
+        intent.putExtra(getString(R.string.year_end), yearE.getSelectedItem().toString());
+        intent.putExtra(getString(R.string.rating_start), ratingS.getSelectedItem().toString());
+        intent.putExtra(getString(R.string.rating_end), ratingE.getSelectedItem().toString());
+        intent.putExtra(getString(R.string.runtime_start), runS.getSelectedItem().toString());
+        intent.putExtra(getString(R.string.runtime_end), runE.getSelectedItem().toString());
         startActivity(intent);
     }
 
-
     public void setSpinners() {
         // Create genre spinner
-        makeSpinner(R.id.spinner_genre, R.array.genre_array, 0);
+        genre = makeSpinner(R.id.spinner_genre, R.array.genre_array, 0);
 
         // Create year spinners
-        makeSpinner(R.id.spinner_year_start, R.array.year_array,27);
-        makeSpinner(R.id.spinner_year_end, R.array.year_array, 0);
+        yearS = makeSpinner(R.id.spinner_year_start, R.array.year_array,27);
+        yearE = makeSpinner(R.id.spinner_year_end, R.array.year_array, 0);
 
         // Create rating spinners
-        makeSpinner(R.id.spinner_rating_start, R.array.rating_array, 9);
-        makeSpinner(R.id.spinner_rating_end, R.array.rating_array, 0);
+        ratingS = makeSpinner(R.id.spinner_rating_start, R.array.rating_array, 9);
+        ratingE = makeSpinner(R.id.spinner_rating_end, R.array.rating_array, 0);
 
         // Create runtime spinners
-        makeSpinner(R.id.spinner_runtime_start, R.array.runtime_array, 6);
-        makeSpinner(R.id.spinner_runtime_end, R.array.runtime_array, 0);
+        runS = makeSpinner(R.id.spinner_runtime_start, R.array.runtime_array, 6);
+        runE = makeSpinner(R.id.spinner_runtime_end, R.array.runtime_array, 0);
     }
 
     public Spinner makeSpinner(int id, int array, int sel) {

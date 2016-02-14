@@ -23,17 +23,23 @@
             android:columnCount="1"
             android:rowCount="3">
 
-            <ImageView
-                android:id="@+id/imageView"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="161dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_column="0"
-                android:layout_gravity="left|top"
-                android:layout_row="0"
-                android:src="@drawable/icon_image" />
+                android:layout_height="287dp">
+
+                <ImageView
+                    android:id="@+id/image_poster"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_column="0"
+                    android:layout_gravity="left|top"
+                    android:layout_row="0"
+                    android:src="@drawable/icon_image" />
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -76,14 +82,15 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="44dp"
-                        android:orientation="vertical">
+                        android:layout_height="150dp"
+                        android:orientation="vertical"
+                        android:weightSum="1">
 
                         <TextView
                             android:id="@+id/text_description"
                             android:textStyle="italic"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_alignEnd="@+id/text_genre"
                             android:layout_alignRight="@+id/text_genre"
                             android:layout_below="@+id/text_title"
@@ -91,7 +98,8 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_row="2"
                             android:text="Description"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textAlignment="center" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -197,44 +205,50 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <GridLayout
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:rowCount="1"
-                    android:columnCount="2">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="189dp"
-                        android:layout_height="match_parent" >
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/view_thumbs_up"
+                        android:onClick="RateGood">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="match_parent"
-                            android:id="@+id/imageView3"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@drawable/icon_thumbs_up"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/pic_thumbs_up"
+                            android:background="@drawable/icon_thumbs_up"
+                            android:layout_gravity="center_horizontal" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="189dp"
-                        android:layout_height="match_parent" >
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/view_thumbs_down"
+                        android:onClick="RateBad">
 
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="match_parent"
-                            android:id="@+id/imageView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/pic_thumbs_down"
                             android:layout_gravity="center_horizontal"
                             android:background="@drawable/icon_thumbs_down" />
                     </LinearLayout>
 
+                </LinearLayout>
 
-                </GridLayout>
             </LinearLayout>
 
         </GridLayout>

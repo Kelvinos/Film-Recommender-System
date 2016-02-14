@@ -39,8 +39,8 @@ public class Account extends BaseActivity {
 
     public void recommendationsList() {
         // Films from film list
-        Bundle b = getIntent().getExtras();
-        ArrayList<Film> films = b.getParcelable("film_array");
+       // Bundle b = getIntent().getExtras();
+       // ArrayList<Film> films = b.getParcelable("film_array");
 
         ArrayList<String> recommendations = new ArrayList<>();
         recommendations.add("Film 7");

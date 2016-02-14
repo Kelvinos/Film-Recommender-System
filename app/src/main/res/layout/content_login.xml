@@ -26,7 +26,7 @@
             <EditText
                 android:layout_width="211dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText"
+                android:id="@+id/text_username"
                 android:ems="10"
                 android:layout_gravity="center_horizontal"
                 android:textAlignment="center"
@@ -48,11 +48,31 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:ems="10"
-                android:id="@+id/editText6"
+                android:id="@+id/text_password"
                 android:textAlignment="center"
                 android:layout_gravity="center_horizontal"
                 android:hint="Password" />
 
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="19dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textAlignment="center"
+                android:id="@+id/text_error"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#e34b4b" />
         </LinearLayout>
 
         <Space

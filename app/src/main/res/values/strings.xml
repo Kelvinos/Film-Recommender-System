@@ -8,6 +8,14 @@
     <string name="button_send">Send</string>
     <string name="title_activity_list">List</string>
 
+    <string name="genre">Genre</string>
+    <string name="year_start">Year Start</string>
+    <string name="year_end">Year End</string>
+    <string name="rating_start">Rating Start</string>
+    <string name="rating_end">Rating End</string>
+    <string name="runtime_start">Runtime Start</string>
+    <string name="runtime_end">Runtime End</string>
+
     <string-array name="genre_array">
         <item>Action</item>
         <item>Adventure</item>
