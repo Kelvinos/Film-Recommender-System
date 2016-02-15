@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Home"
+            android:name=".View.Search"
             android:label="Suggest Movie"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -21,39 +21,39 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FilmList"
+            android:name=".View.Film_List"
             android:label="Film List"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Login"
+            android:name=".View.Login"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Register"
+            android:name=".View.Register"
             android:label="@string/title_activity_register"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Settings"
+            android:name=".View.Settings"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".FilmDetails"
+            android:name=".View.Film_Details"
             android:label="@string/title_activity_film_details"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Account"
+            android:name=".View.Account"
             android:label="@string/title_activity_account"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Rated"
+            android:name=".View.Rated"
             android:label="@string/title_activity_rated"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Recommendations"
+            android:name=".View.Recommendations"
             android:label="@string/title_activity_recommendations"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".Profile"
+            android:name=".View.Profile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme"></activity>
     </application>

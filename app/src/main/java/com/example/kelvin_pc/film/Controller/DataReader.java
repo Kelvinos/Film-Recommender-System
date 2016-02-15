@@ -1,4 +1,4 @@
-package com.example.kelvin_pc.film;
+package com.example.kelvin_pc.film.Controller;
 
 import android.util.Log;
 

@@ -1,10 +1,12 @@
-package com.example.kelvin_pc.film;
+package com.example.kelvin_pc.film.View;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.kelvin_pc.film.R;
 
 import java.util.ArrayList;
 
@@ -14,15 +16,15 @@ public class Account extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setUp(R.layout.activity_account);
         super.onCreate(savedInstanceState);
-
-        //set up recently rated list
-        recentlyRatedList();
-
-        //set up recommendations list
-        recommendationsList();
+        init();
     }
 
-    public void recentlyRatedList() {
+    public void init() {
+        initRecentlyRated();
+        initRecommendations();
+    }
+
+    public void initRecentlyRated() {
         ArrayList<String> ratedItems = new ArrayList<>();
         ratedItems.add("Film 1 - Good");
         ratedItems.add("Film 2 - Bad");
@@ -37,11 +39,10 @@ public class Account extends BaseActivity {
         lv.setAdapter(adapter);
     }
 
-    public void recommendationsList() {
+    public void initRecommendations() {
         // Films from film list
        // Bundle b = getIntent().getExtras();
        // ArrayList<Film> films = b.getParcelable("film_array");
-
         ArrayList<String> recommendations = new ArrayList<>();
         recommendations.add("Film 7");
         recommendations.add("Film 8");

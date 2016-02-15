@@ -16,10 +16,53 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="462dp"
         android:id="@+id/listView" />
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/button_previous"
+                android:onClick="previousPage"
+                android:background="@drawable/icon_arrow_back"/>
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Page"
+                android:id="@+id/text_page" />
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/button_next"
+                android:layout_gravity="right"
+                android:onClick="nextPage"
+                android:background="@drawable/icon_arrow_forward"/>
+        </LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

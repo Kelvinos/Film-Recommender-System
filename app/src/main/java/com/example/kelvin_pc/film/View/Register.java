@@ -1,10 +1,12 @@
-package com.example.kelvin_pc.film;
+package com.example.kelvin_pc.film.View;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.kelvin_pc.film.R;
 
 public class Register extends BaseActivity {
 
@@ -14,9 +16,12 @@ public class Register extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setUp(R.layout.activity_register);
         super.onCreate(savedInstanceState);
+        init();
+    }
 
-//        loginDataBaseAdapter = new LoginDataBaseAdapter(this);
-//        loginDataBaseAdapter.open();
+    public void init() {
+        //loginDataBaseAdapter = new LoginDataBaseAdapter(this);
+        //loginDataBaseAdapter.open();
     }
 
     public void Confirm(View view) {

@@ -1,4 +1,4 @@
-package com.example.kelvin_pc.film;
+package com.example.kelvin_pc.film.View;
 
 
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+
+import com.example.kelvin_pc.film.R;
 
 public class BaseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
@@ -53,17 +55,12 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void Home() {
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Search.class);
         startActivity(intent);
     }
 
     public void Account() {
         Intent intent = new Intent(this, Account.class);
-        startActivity(intent);
-    }
-
-    public void Login() {
-        Intent intent = new Intent(this, Login.class);
         startActivity(intent);
     }
 

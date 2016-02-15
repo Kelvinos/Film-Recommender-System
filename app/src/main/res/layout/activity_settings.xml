@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.kelvin_pc.film.Settings">
+    tools:context=".View.Settings">
 
     <include
         android:id="@+id/tool_bar"

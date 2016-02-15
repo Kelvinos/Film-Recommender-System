@@ -1,4 +1,4 @@
-package com.example.kelvin_pc.film;
+package com.example.kelvin_pc.film.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-public class Home extends BaseActivity implements AdapterView.OnItemSelectedListener{
+import com.example.kelvin_pc.film.R;
+
+public class Search extends BaseActivity implements AdapterView.OnItemSelectedListener{
 
     private Spinner genre, yearS, yearE, ratingS, ratingE, runS, runE;
 
@@ -15,13 +17,15 @@ public class Home extends BaseActivity implements AdapterView.OnItemSelectedList
     protected void onCreate(Bundle savedInstanceState) {
         setUp(R.layout.activity_home);
         super.onCreate(savedInstanceState);
-
-        setSpinners();
+        init();
     }
 
-    // When the search button is pressed run this method
+    public void init() {
+        initSpinners();
+    }
+
     public void SearchFilms(View view) {
-        Intent intent = new Intent(this, FilmList.class);
+        Intent intent = new Intent(this, Film_List.class);
         intent.putExtra(getString(R.string.genre), genre.getSelectedItem().toString());
         intent.putExtra(getString(R.string.year_start), yearS.getSelectedItem().toString());
         intent.putExtra(getString(R.string.year_end), yearE.getSelectedItem().toString());
@@ -32,18 +36,15 @@ public class Home extends BaseActivity implements AdapterView.OnItemSelectedList
         startActivity(intent);
     }
 
-    public void setSpinners() {
+    public void initSpinners() {
         // Create genre spinner
         genre = makeSpinner(R.id.spinner_genre, R.array.genre_array, 0);
-
         // Create year spinners
         yearS = makeSpinner(R.id.spinner_year_start, R.array.year_array,27);
         yearE = makeSpinner(R.id.spinner_year_end, R.array.year_array, 0);
-
         // Create rating spinners
         ratingS = makeSpinner(R.id.spinner_rating_start, R.array.rating_array, 9);
         ratingE = makeSpinner(R.id.spinner_rating_end, R.array.rating_array, 0);
-
         // Create runtime spinners
         runS = makeSpinner(R.id.spinner_runtime_start, R.array.runtime_array, 6);
         runE = makeSpinner(R.id.spinner_runtime_end, R.array.runtime_array, 0);

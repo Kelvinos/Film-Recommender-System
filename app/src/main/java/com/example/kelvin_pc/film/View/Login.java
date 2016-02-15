@@ -1,4 +1,4 @@
-package com.example.kelvin_pc.film;
+package com.example.kelvin_pc.film.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.kelvin_pc.film.Controller.DataReader;
+import com.example.kelvin_pc.film.R;
+import com.example.kelvin_pc.film.View.Account;
+import com.example.kelvin_pc.film.View.BaseActivity;
+import com.example.kelvin_pc.film.View.Search;
+import com.example.kelvin_pc.film.View.Register;
 
 public class Login extends BaseActivity {
 
@@ -21,7 +28,7 @@ public class Login extends BaseActivity {
 
     // Go back to the homepage
     public void HomePage(View view) {
-        Intent intent = new Intent(this, Home.class);
+        Intent intent = new Intent(this, Search.class);
         startActivity(intent);
     }
 
