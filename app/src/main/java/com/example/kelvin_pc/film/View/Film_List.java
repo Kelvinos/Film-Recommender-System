@@ -1,18 +1,14 @@
 package com.example.kelvin_pc.film.View;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -20,11 +16,12 @@ import android.widget.TextView;
 
 import com.example.kelvin_pc.film.Controller.AsyncResponse;
 import com.example.kelvin_pc.film.Controller.Debugger;
-import com.example.kelvin_pc.film.Controller.FilmAPI;
+import com.example.kelvin_pc.film.Controller.Film_Downloader;
+import com.example.kelvin_pc.film.Controller.Image_Downloader;
+import com.example.kelvin_pc.film.Model.System_Variables;
 import com.example.kelvin_pc.film.Model.Film;
 import com.example.kelvin_pc.film.R;
 
-import java.net.URL;
 import java.util.ArrayList;
 
 public class Film_List extends BaseActivity implements AsyncResponse {
@@ -32,7 +29,6 @@ public class Film_List extends BaseActivity implements AsyncResponse {
     private String genre, yearS, yearE, ratingS, ratingE, runS, runE;
     private ProgressDialog progress;
     private ListAdapter la;
-    private int page = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,29 +38,28 @@ public class Film_List extends BaseActivity implements AsyncResponse {
     }
 
     public void init() {
+        System_Variables.PAGE_NUMBER = 1;
         getBundleData();
         generateFilmQuery();
     }
 
-
     public void generateFilmQuery() {
         updatePageText();
         updateButtons();
-        FilmAPI fa = new FilmAPI();
+        Film_Downloader fa = new Film_Downloader();
         fa.delegate = this;
-        fa.generateQuery(genre, yearS, ratingS, Integer.toString(page));
+        fa.generateQuery(genre, yearS, ratingS, Integer.toString(System_Variables.PAGE_NUMBER));
         startProgressBar();
     }
 
     @Override
     public void processFinish(final ArrayList<Film> output) {
-        new Debugger().print("reached here");
         stopProgressBar();
         generateFilmList(output);
     }
 
     public void generateFilmList(final ArrayList<Film> films) {
-        ListView lv = (ListView) findViewById(R.id.listView);
+        final ListView lv = (ListView) findViewById(R.id.listView);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position,
@@ -80,16 +75,12 @@ public class Film_List extends BaseActivity implements AsyncResponse {
             la = new ListAdapter(this, films);
             lv.setAdapter(la);
         } else {
-            runOnUiThread(new Thread(new Runnable() {
-                public void run() {
-                    la.clear();
-                    la.addAll(films);
-                }
-            }));
-
+            la.addItems(new ArrayList<Film>());
+            la.notifyDataSetChanged();
+            la.addItems(films);
+            la.notifyDataSetChanged();
+            lv.setSelectionAfterHeaderView();
         }
-        la.notifyDataSetChanged();
-        lv.setSelectionAfterHeaderView();
 
     }
 
@@ -116,7 +107,7 @@ public class Film_List extends BaseActivity implements AsyncResponse {
 
     public void updateButtons() {
         Button b = (Button) findViewById(R.id.button_previous);
-        if (page == 1) {
+        if (System_Variables.PAGE_NUMBER == 1) {
             b.setClickable(false);
             b.setVisibility(View.INVISIBLE);
         } else {
@@ -127,19 +118,17 @@ public class Film_List extends BaseActivity implements AsyncResponse {
 
     public void updatePageText() {
         TextView tv = (TextView) findViewById(R.id.text_page);
-        tv.setText("Page " + page);
+        tv.setText("Page " + System_Variables.PAGE_NUMBER);
     }
 
     public void nextPage(View view) {
-        this.page = page + 1;
-        new Debugger().print(Integer.toString(page));
+        System_Variables.PAGE_NUMBER = System_Variables.PAGE_NUMBER+ 1;
         generateFilmQuery();
     }
 
     public void previousPage(View view) {
-        if (page != 1)
-            this.page = page - 1;
-        new Debugger().print(Integer.toString(page));
+        if (System_Variables.PAGE_NUMBER != 1)
+            System_Variables.PAGE_NUMBER = System_Variables.PAGE_NUMBER - 1;
         generateFilmQuery();
     }
 
@@ -155,10 +144,15 @@ public class Film_List extends BaseActivity implements AsyncResponse {
             this.films = films;
         }
 
+        public void addItems(ArrayList<Film> films) {
+            this.films = films;
+        }
+
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
+            View v = convertView;
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView = inflater.inflate(R.layout.row, parent, false);
+            rowView = inflater.inflate(R.layout.row, null);
             generateTitle(position);
             generateTag(position);
             generateImage(position);
@@ -172,24 +166,21 @@ public class Film_List extends BaseActivity implements AsyncResponse {
 
         public void generateTag(final int position) {
             TextView tag = (TextView) rowView.findViewById(R.id.text_description);
-            tag.setText(films.get(position).getTag());
+            String tagString = films.get(position).getTag();
+            int thresh = System_Variables.TAG_THRESH;
+            if (tagString.length() > thresh) {
+                tagString = tagString.substring(0, thresh) + " ...";
+            }
+            tag.setText(tagString);
         }
 
         public void generateImage(final int position) {
             final ImageView image = (ImageView) rowView.findViewById(R.id.image_poster);
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        URL url = new URL(films.get(position).getImg());
-                        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                        image.setImageBitmap(bmp);
-                    } catch (Exception e) {
-                        new Debugger().print(e.toString());
-                    }
-                }
-            });
-            thread.start();
+            try {
+                new Image_Downloader(image).execute(films.get(position).getImg());
+            } catch (Exception e) {
+                new Debugger().print(e.toString());
+            }
         }
 
     }

@@ -1,17 +1,17 @@
 package com.example.kelvin_pc.film.View;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.kelvin_pc.film.Controller.Debugger;
+import com.example.kelvin_pc.film.Controller.Image_Downloader;
+import com.example.kelvin_pc.film.Model.System_Variables;
 import com.example.kelvin_pc.film.Model.Film;
 import com.example.kelvin_pc.film.R;
-
-import java.net.URL;
 
 public class Film_Details extends BaseActivity {
 
@@ -51,7 +51,12 @@ public class Film_Details extends BaseActivity {
 
     public void generateDescription() {
         TextView description = (TextView) findViewById(R.id.text_description);
-        description.setText(film.getDescription());
+        String desc = film.getDescription();
+        int thresh = System_Variables.DESC_THRESH;
+        if (desc.length() > thresh) {
+            desc = desc.substring(0, thresh) + " ...";
+        }
+        description.setText(desc);
     }
 
     public void generateRating() {
@@ -76,18 +81,17 @@ public class Film_Details extends BaseActivity {
 
     public void generatePoster() {
         final ImageView image = (ImageView) findViewById(R.id.image_poster);
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(film.getImg());
-                    Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                    image.setImageBitmap(bmp);
-                } catch (Exception e) {
-                }
-            }
-        });
-        thread.start();
+        try {
+            new Image_Downloader(image).execute(film.getImg());
+        } catch (Exception e) {
+            new Debugger().print(e.toString());
+        }
+    }
+
+    public void expandDescription(View view) {
+        Intent intent = new Intent(this, Description.class);
+        intent.putExtra("Description", film.getDescription());
+        startActivity(intent);
     }
 
     public void RateGood(View view) {

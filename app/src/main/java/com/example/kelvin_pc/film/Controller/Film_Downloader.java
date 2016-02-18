@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class FilmAPI extends AsyncTask<String, Void, String> implements AsyncResponse {
+public class Film_Downloader extends AsyncTask<String, Void, String> implements AsyncResponse {
 
     private final String IMAGE_URL = "http://image.tmdb.org/t/p/w500/";
     private final String BASE_URL = "https://api.themoviedb.org/3/discover/movie?";
@@ -32,7 +32,7 @@ public class FilmAPI extends AsyncTask<String, Void, String> implements AsyncRes
     private HashMap<String, String> genreMap;
     private static String pageLimit;
 
-    public FilmAPI() {
+    public Film_Downloader() {
         initGenres();
     }
 
