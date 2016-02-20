@@ -1,6 +1,8 @@
 package com.example.kelvin_pc.film.View;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,11 +13,14 @@ import com.example.kelvin_pc.film.Controller.Debugger;
 import com.example.kelvin_pc.film.Controller.Image_Downloader;
 import com.example.kelvin_pc.film.Model.System_Variables;
 import com.example.kelvin_pc.film.Model.Film;
+import com.example.kelvin_pc.film.Model.User;
 import com.example.kelvin_pc.film.R;
 
 public class Film_Details extends BaseActivity {
 
     private Film film;
+    private LinearLayout g, b;
+    private User u;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +29,24 @@ public class Film_Details extends BaseActivity {
         init();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (System_Variables.USER.getUpdated()) {
+            updateUserRating();
+        }
+    }
+
     public void init() {
+        generateVariables();
         getBundleData();
         generatePage();
+    }
+
+    public void generateVariables() {
+        g = (LinearLayout) findViewById(R.id.view_thumbs_up);
+        b = (LinearLayout) findViewById(R.id.view_thumbs_down);
+        u = System_Variables.USER;
     }
 
     public void getBundleData() {
@@ -42,6 +62,7 @@ public class Film_Details extends BaseActivity {
         generateRuntime();
         generateReleaseDate();
         generatePoster();
+        updateUserRating();
     }
 
     public void generateTitle() {
@@ -82,10 +103,54 @@ public class Film_Details extends BaseActivity {
     public void generatePoster() {
         final ImageView image = (ImageView) findViewById(R.id.image_poster);
         try {
-            new Image_Downloader(image).execute(film.getImg());
+            new Image_Downloader(image).execute(film.getBackdrop());
         } catch (Exception e) {
             new Debugger().print(e.toString());
         }
+    }
+
+    public void updateUserRating() {
+        if (u.ratingExists(film)) {
+            int rating = u.getRating(film);
+            switch (rating) {
+                case -1:
+                    setRatedBad();
+                    break;
+                case 0:
+                    setNoRating();
+                    break;
+                case 1:
+                    setRatedGood();
+                    break;
+            }
+        } else {
+            setNoRating();
+        }
+    }
+
+    public void setRatedGood() {
+        setNoRating();
+        g.setBackgroundColor(Color.GREEN);
+    }
+
+    public void setRatedBad() {
+        setNoRating();
+        b.setBackgroundColor(Color.RED);
+    }
+
+    public void setNoRating() {
+        g.setBackgroundColor(getResources().getColor(R.color.transparent));
+        b.setBackgroundColor(getResources().getColor(R.color.transparent));
+    }
+
+    public void RateGood(View view) {
+        u.addRating(film, 1);
+        updateUserRating();
+    }
+
+    public void RateBad(View view) {
+        u.addRating(film, -1);
+        updateUserRating();
     }
 
     public void expandDescription(View view) {
@@ -93,22 +158,4 @@ public class Film_Details extends BaseActivity {
         intent.putExtra("Description", film.getDescription());
         startActivity(intent);
     }
-
-    public void RateGood(View view) {
-        film.setUserRating("1");
-        LinearLayout g = (LinearLayout) findViewById(R.id.view_thumbs_up);
-        LinearLayout b = (LinearLayout) findViewById(R.id.view_thumbs_down);
-        g.setBackgroundColor(getResources().getColor(R.color.yellow));
-        b.setBackgroundColor(getResources().getColor(R.color.transparent));
-    }
-
-    public void RateBad(View view) {
-        film.setUserRating("0");
-        LinearLayout g = (LinearLayout) findViewById(R.id.view_thumbs_up);
-        LinearLayout b = (LinearLayout) findViewById(R.id.view_thumbs_down);
-        b.setBackgroundColor(getResources().getColor(R.color.yellow));
-        g.setBackgroundColor(getResources().getColor(R.color.transparent));
-    }
-
-
 }

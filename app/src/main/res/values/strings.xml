@@ -9,12 +9,9 @@
     <string name="title_activity_list">List</string>
 
     <string name="genre">Genre</string>
-    <string name="year_start">Year Start</string>
-    <string name="year_end">Year End</string>
-    <string name="rating_start">Rating Start</string>
-    <string name="rating_end">Rating End</string>
-    <string name="runtime_start">Runtime Start</string>
-    <string name="runtime_end">Runtime End</string>
+    <string name="release_date">Year Start</string>
+    <string name="rating">Rating Start</string>
+    <string name="vote_count">Runtime Start</string>
 
     <string-array name="genre_array">
         <item>Action</item>
@@ -39,7 +36,7 @@
         <item>Western</item>
     </string-array>
 
-    <string-array name="year_array">
+    <string-array name="release_date_array">
         <item>New</item>
         <item>2015</item>
         <item>2014</item>
@@ -83,14 +80,34 @@
         <item>1</item>
     </string-array>
 
-    <string-array name="runtime_array">
-        <item>180+</item>
-        <item>160</item>
-        <item>140</item>
-        <item>120</item>
+    <string-array name="vote_count_array">
+        <item>10</item>
         <item>100</item>
-        <item>80</item>
-        <item>60</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+        <item>4000</item>
+        <item>5000</item>
+    </string-array>
+
+    <string-array name="greater_lesser_array">
+        <item>Greater</item>
+        <item>Lesser</item>
+    </string-array>
+
+    <string-array name="sort_by_array">
+        <item>Popularity</item>
+        <item>Release Date</item>
+        <item>Revenue</item>
+        <item>Title</item>
+        <item>Rating</item>
+        <item>Votes</item>
+    </string-array>
+
+    <string-array name="order_by_array">
+        <item>desc</item>
+        <item>asc</item>
     </string-array>
 
     <string name="help">This application works by suggesting films based on the requirements set by the user. A user can
@@ -103,7 +120,7 @@
     <string name="title_activity_film_details">Film Details</string>
     <string name="title_activity_account">Account</string>
     <string name="title_activity_rated">Rated</string>
-    <string name="title_activity_recommendations">Recommendations</string>
+    <string name="title_activity_recommendations">Suggested</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_description">Description</string>
 </resources>

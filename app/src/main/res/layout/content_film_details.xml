@@ -22,7 +22,7 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="287dp">
+                android:layout_height="226dp">
 
                 <ImageView
                     android:id="@+id/image_poster"
@@ -34,7 +34,9 @@
                     android:layout_column="0"
                     android:layout_gravity="left|top"
                     android:layout_row="0"
-                    android:src="@drawable/icon_image" />
+                    android:src="@drawable/icon_image"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"/>
             </LinearLayout>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -215,7 +217,8 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:id="@+id/layout_rating_thumbs">
 
                 <LinearLayout
                     android:orientation="horizontal"

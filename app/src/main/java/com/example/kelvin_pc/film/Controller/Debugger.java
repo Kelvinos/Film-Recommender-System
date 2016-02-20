@@ -11,6 +11,6 @@ public class Debugger {
     public void print(String string) {
         Log.d("myTag", string);
     }
-    public void print(String loc, String string) {Log.d("myTag" + loc, string);}
+    public void print(String loc, String string) {Log.d("myTag " + loc, string);}
 
 }

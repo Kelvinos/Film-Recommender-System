@@ -9,15 +9,23 @@
         android:orderInCategory="200"
         android:title="Home"
         android:icon="@drawable/icon_search"
-        app:showAsAction="ifRoom">
+        app:showAsAction="always">
     </item>
 
     <item
-        android:id="@+id/action_account"
+        android:id="@+id/action_rated"
         android:orderInCategory="200"
-        android:title="Account"
-        android:icon="@drawable/icon_account_circle"
-        app:showAsAction="ifRoom">
+        android:title="Rated"
+        android:icon="@drawable/icon_rated"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/action_recommendations"
+        android:orderInCategory="200"
+        android:title="Recommendations"
+        android:icon="@drawable/icon_recommendations"
+        app:showAsAction="always">
     </item>
 
     <item
@@ -25,7 +33,7 @@
         android:orderInCategory="300"
         android:title="Settings"
         android:icon="@drawable/icon_settings"
-        app:showAsAction="ifRoom">
+        app:showAsAction="always">
     </item>
 
 </menu>

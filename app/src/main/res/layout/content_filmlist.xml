@@ -16,15 +16,70 @@
         android:layout_height="wrap_content"
         android:id="@+id/view" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="26dp"
+        android:layout_weight="0.87"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Sort By:"
+            android:id="@+id/textView19"
+            android:layout_gravity="center_vertical" />
+
+        <Spinner
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_sort_by"
+            android:layout_gravity="center"
+            android:layout_weight="0.91"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Order:"
+            android:id="@+id/textView20"
+            android:layout_gravity="center_vertical" />
+
+        <Spinner
+            android:layout_width="61dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner_order_by"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:layout_weight="0.10" />
+
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_refresh"
+            android:background="@drawable/icon_refresh"
+            android:onClick="refresh" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="462dp"
-        android:id="@+id/listView" />
+        android:layout_height="416dp"
+        android:id="@+id/listView"
+        android:layout_weight="0.21" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -33,8 +88,8 @@
             android:layout_gravity="center">
 
             <Button
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:text=""
                 android:id="@+id/button_previous"
                 android:onClick="previousPage"
@@ -56,14 +111,16 @@
                 android:layout_height="match_parent" />
 
             <Button
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:text=""
                 android:id="@+id/button_next"
                 android:layout_gravity="right"
                 android:onClick="nextPage"
                 android:background="@drawable/icon_arrow_forward"/>
+
         </LinearLayout>
+
     </LinearLayout>
 
 

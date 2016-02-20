@@ -1,8 +1,12 @@
 package com.example.kelvin_pc.film.View;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +15,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.kelvin_pc.film.Controller.AsyncResponse;
@@ -20,13 +26,17 @@ import com.example.kelvin_pc.film.Controller.Film_Downloader;
 import com.example.kelvin_pc.film.Controller.Image_Downloader;
 import com.example.kelvin_pc.film.Model.System_Variables;
 import com.example.kelvin_pc.film.Model.Film;
+import com.example.kelvin_pc.film.Model.User;
 import com.example.kelvin_pc.film.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Film_List extends BaseActivity implements AsyncResponse {
 
-    private String genre, yearS, yearE, ratingS, ratingE, runS, runE;
+    private String genre, release, releaseSort, rating, ratingSort, votes, votesSort;
+    private Spinner sort, order;
+    private HashMap<String, String> sortByMap;
     private ProgressDialog progress;
     private ListAdapter la;
 
@@ -37,10 +47,63 @@ public class Film_List extends BaseActivity implements AsyncResponse {
         init();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (la != null) {
+            if (System_Variables.USER.getUpdated()) {
+                la.notifyDataSetChanged();
+                System_Variables.USER.setUpdated(false);
+            }
+        }
+    }
+
     public void init() {
-        System_Variables.PAGE_NUMBER = 1;
+        generateVariables();
+        initSpinners();
         getBundleData();
         generateFilmQuery();
+    }
+
+    public void generateVariables() {
+        System_Variables.PAGE_NUMBER = 1;
+        sortByMap = new HashMap<>();
+        sortByMap.put("Popularity", "popularity");
+        sortByMap.put("Release Date", "release_date");
+        sortByMap.put("Revenue", "revenue");
+        sortByMap.put("Title", "original_title");
+        sortByMap.put("Rating", "vote_average");
+        sortByMap.put("Votes", "vote_count");
+    }
+
+    public void initSpinners() {
+        sort = makeSpinner(R.id.spinner_sort_by, R.array.sort_by_array, 0);
+        order = makeSpinner(R.id.spinner_order_by, R.array.order_by_array, 0);
+    }
+
+    public Spinner makeSpinner(int id, int array, int sel) {
+        Spinner spinner = (Spinner) findViewById(id);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+        spinner.setSelection(sel);
+        return spinner;
+    }
+
+    public void getBundleData() {
+        Bundle b = getIntent().getExtras();
+        genre = b.getString(getString(R.string.genre));
+
+        release = b.getString(getString(R.string.release_date));
+        releaseSort = b.getString(getString(R.string.release_date) + "x");
+
+        rating = b.getString(getString(R.string.rating));
+        ratingSort = b.getString(getString(R.string.rating) + "x");
+
+        votes = b.getString(getString(R.string.vote_count));
+        votesSort = b.getString(getString(R.string.vote_count) + "x");
     }
 
     public void generateFilmQuery() {
@@ -48,14 +111,20 @@ public class Film_List extends BaseActivity implements AsyncResponse {
         updateButtons();
         Film_Downloader fa = new Film_Downloader();
         fa.delegate = this;
-        fa.generateQuery(genre, yearS, ratingS, Integer.toString(System_Variables.PAGE_NUMBER));
+        String sortBy = getSortByString(sort.getSelectedItem().toString());
+        String orderBy = order.getSelectedItem().toString();
+        fa.generateQuery(genre, release, releaseSort, rating, ratingSort, votes, votesSort, sortBy, orderBy, Integer.toString(System_Variables.PAGE_NUMBER));
         startProgressBar();
     }
 
     @Override
     public void processFinish(final ArrayList<Film> output) {
         stopProgressBar();
-        generateFilmList(output);
+        if (output != null) {
+            generateFilmList(output);
+        } else {
+            displayNoResults();
+        }
     }
 
     public void generateFilmList(final ArrayList<Film> films) {
@@ -82,17 +151,6 @@ public class Film_List extends BaseActivity implements AsyncResponse {
             lv.setSelectionAfterHeaderView();
         }
 
-    }
-
-    public void getBundleData() {
-        Bundle b = getIntent().getExtras();
-        genre = b.getString(getString(R.string.genre));
-        yearS = b.getString(getString(R.string.year_start));
-        yearE = b.getString(getString(R.string.year_end));
-        ratingS = b.getString(getString(R.string.rating_start));
-        ratingE = b.getString(getString(R.string.rating_end));
-        runS = b.getString(getString(R.string.runtime_start));
-        runE = b.getString(getString(R.string.runtime_end));
     }
 
     public void startProgressBar() {
@@ -132,6 +190,28 @@ public class Film_List extends BaseActivity implements AsyncResponse {
         generateFilmQuery();
     }
 
+    public void refresh(View view) {
+        generateFilmQuery();
+    }
+
+    public void displayNoResults() {
+        AlertDialog alertDialog = new AlertDialog.Builder(Film_List.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage("No results found.");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public String getSortByString(String s) {
+        return sortByMap.get(s);
+    }
+
     public class ListAdapter extends ArrayAdapter<Film> {
 
         private final Context context;
@@ -153,10 +233,20 @@ public class Film_List extends BaseActivity implements AsyncResponse {
             View v = convertView;
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView = inflater.inflate(R.layout.row, null);
+            generateColor(position);
             generateTitle(position);
             generateTag(position);
             generateImage(position);
             return rowView;
+        }
+
+        public void generateColor(final int position) {
+            LinearLayout l = (LinearLayout) rowView.findViewById(R.id.layout_row);
+            User u = System_Variables.USER;
+            int rating = u.getRating(films.get(position));
+            if (rating == 0) { }
+            if (rating == 1) { l.setBackgroundColor(Color.GREEN); }
+            if (rating == -1) { l.setBackgroundColor(Color.RED); }
         }
 
         public void generateTitle(final int position) {

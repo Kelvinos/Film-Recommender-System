@@ -40,8 +40,11 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_account:
-                Account();
+            case R.id.action_rated:
+                rated();
+                return true;
+            case R.id.action_recommendations:
+                recommendations();
                 return true;
             case R.id.action_settings:
                 Settings();
@@ -52,6 +55,16 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void recommendations() {
+        Intent intent = new Intent(this, Recommendations.class);
+        startActivity(intent);
+    }
+
+    public void rated() {
+        Intent intent = new Intent(this, Rated.class);
+        startActivity(intent);
     }
 
     public void Home() {

@@ -7,12 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.kelvin_pc.film.Controller.DataReader;
+import com.example.kelvin_pc.film.Controller.Data_Handler;
 import com.example.kelvin_pc.film.R;
-import com.example.kelvin_pc.film.View.Account;
-import com.example.kelvin_pc.film.View.BaseActivity;
-import com.example.kelvin_pc.film.View.Search;
-import com.example.kelvin_pc.film.View.Register;
 
 public class Login extends BaseActivity {
 
@@ -33,21 +29,21 @@ public class Login extends BaseActivity {
     }
 
     public void Login(View view) {
-        Log.d("mytag", "21212121");
-        final EditText textUsername = (EditText) findViewById(R.id.text_username);
-        final EditText textPassword = (EditText) findViewById(R.id.text_password);
-        String username = textUsername.getText().toString();
-        String password = textPassword.getText().toString();
-        DataReader ur = new DataReader();
-        //String storedPass = loginDataBaseAdapter.getSinlgeEntry(username);
-        String storedPass = ur.getPass(username);
-        if (storedPass!=null && storedPass.equals(password)) {
-            Intent intent = new Intent(this, Account.class);
-            startActivity(intent);
-        } else {
-            final TextView textError = (TextView) findViewById(R.id.text_error);
-            textError.setText("Invalid username or password ");
-        }
+//        Log.d("mytag", "21212121");
+//        final EditText textUsername = (EditText) findViewById(R.id.text_username);
+//        final EditText textPassword = (EditText) findViewById(R.id.text_password);
+//        String username = textUsername.getText().toString();
+//        String password = textPassword.getText().toString();
+//        Data_Handler ur = new Data_Handler();
+//        //String storedPass = loginDataBaseAdapter.getSinlgeEntry(username);
+////        String storedPass = ur.getPass(username);
+//        if (storedPass!=null && storedPass.equals(password)) {
+//            Intent intent = new Intent(this, Account.class);
+//            startActivity(intent);
+//        } else {
+//            final TextView textError = (TextView) findViewById(R.id.text_error);
+//            textError.setText("Invalid username or password ");
+//        }
     }
 
     public void register(View view) {

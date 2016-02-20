@@ -3,7 +3,6 @@ package com.example.kelvin_pc.film.Controller;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.kelvin_pc.film.Controller.AsyncResponse;
 import com.example.kelvin_pc.film.Model.Film;
 
 import org.json.JSONArray;
@@ -23,8 +22,11 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
     private final String MOVIE_URL = "https://api.themoviedb.org/3/movie/";
     private final String KEY = "api_key=03689a90e8f749caa858f5a89088998a";
     private final String GENRE = "with_genres=";
-    private final String YEAR = "release_date.gte=";
-    private final String SCORE = "vote_average.gte=";
+    private final String RELEASE_DATE = "release_date";
+    private final String RATING = "vote_average";
+    private final String VOTE_COUNT = "vote_count";
+    private final String SORT_BY = "sort_by=";
+
     private String PAGE = "page=1";
     private final int THRESH = 100;
     private movieDetails md = new movieDetails();
@@ -52,12 +54,12 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
                 br.close();
                 return sb.toString();
             } catch (Exception d) {
-                logError(d, "doInBackground 2");
+                new Debugger().print("DO IN BACKGROUND 1", d.toString());
             } finally {
                 con.disconnect();
             }
         } catch (Exception e) {
-            logError(e, "doInBackground 1");
+            new Debugger().print("DO IN BACKGROUND 2", e.toString());
         }
         return null;
     }
@@ -76,7 +78,8 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
             md.delegate = this;
             md.execute(ids);
         } catch (Exception e) {
-            logError(e, "postExecute");
+            delegate.processFinish(null);
+            new Debugger().print("ON POST EXECUTE", e.toString());
         }
     }
 
@@ -104,7 +107,7 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
                 }
                 return films;
             } catch (Exception e) {
-                logError(e, "doInBackground 1");
+                new Debugger().print("DO IN BACKGROUND", e.toString());
             }
             return null;
         }
@@ -125,12 +128,13 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
                     br.close();
                     return sb.toString();
                 } catch (Exception d) {
-                    logError(d, "doInBackground json");
+                    new Debugger().print("GENERATE JSON 1", d.toString());
                     return null;
                 } finally {
                     con.disconnect();
                 }
             } catch (Exception e) {
+                new Debugger().print("GENERATE JSON 2", e.toString());
                 return null;
             }
         }
@@ -139,12 +143,14 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
             try {
                 JSONObject jo = new JSONObject(s);
                 String poster = IMAGE_URL + jo.getString("poster_path").toString();
+                String backdrop = IMAGE_URL + jo.getString("backdrop_path").toString();
                 String description = jo.get("overview").toString();
                 String title = jo.get("original_title").toString();
                 String rating = jo.get("vote_average").toString();
                 String runtime = jo.get("runtime").toString();
                 String release = jo.get("release_date").toString();
                 String tag = jo.get("tagline").toString();
+                int id = Integer.parseInt(jo.get("id").toString());
                 JSONArray ja = jo.getJSONArray("genres");
                 String genres = "";
                 for (int i=0; i<ja.length(); i++) {
@@ -153,10 +159,10 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
                     else
                         genres = genres + ja.getJSONObject(i).get("name").toString();
                 }
-                Film film = new Film(title, tag, description, genres, rating, poster, runtime, release);
+                Film film = new Film(id, title, tag, description, genres, rating, poster, runtime, release, backdrop);
                 return film;
             } catch (Exception e) {
-                logError(e, "postExecute");
+                new Debugger().print("GENERATE FILM DETAILS", e.toString());
                 return null;
             }
         }
@@ -167,9 +173,20 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
 
     }
 
-    public void generateQuery(String genreVal, String yearVal, String ratingVal, String page) {
+    public void generateQuery(String genreVal,
+                              String yearVal, String yearValSort,
+                              String ratingVal, String ratingValSort,
+                              String votesVal, String votesValSort,
+                              String sortBy, String orderBy, String page) {
         this.PAGE = "page=" + page;
-        String x = BASE_URL + GENRE + getGenreId(genreVal) + "&" + YEAR + yearVal + "&" + SCORE + ratingVal + "&" + PAGE + "&" + KEY;
+        String x = BASE_URL +
+                GENRE + getGenreId(genreVal) + "&" +
+                RELEASE_DATE + yearValSort + "=" + yearVal + "&" +
+                RATING + ratingValSort + "=" + ratingVal + "&" +
+                VOTE_COUNT + votesValSort + "=" + votesVal + "&" +
+                SORT_BY + sortBy + "." + orderBy + "&" +
+                PAGE + "&" +
+                KEY;
         Log.d("myTag", x);
         this.execute(x);
     }
@@ -199,9 +216,6 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
         Log.d("myTag", from + ": " + e.toString());
     }
 
-    public String getPageLimit() {
-        return pageLimit;
-    }
 
 }
 
