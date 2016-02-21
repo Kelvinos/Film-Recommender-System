@@ -1,6 +1,5 @@
 package com.example.kelvin_pc.film.View;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.kelvin_pc.film.Controller.Debugger;
 import com.example.kelvin_pc.film.Controller.Image_Downloader;
+import com.example.kelvin_pc.film.Model.BaseActivity;
 import com.example.kelvin_pc.film.Model.System_Variables;
 import com.example.kelvin_pc.film.Model.Film;
 import com.example.kelvin_pc.film.Model.User;

@@ -14,21 +14,17 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.kelvin_pc.film.Controller.Data_Handler;
 import com.example.kelvin_pc.film.Controller.Debugger;
 import com.example.kelvin_pc.film.Controller.Image_Downloader;
 import com.example.kelvin_pc.film.Model.Film;
 import com.example.kelvin_pc.film.Model.System_Variables;
 import com.example.kelvin_pc.film.Model.User;
 import com.example.kelvin_pc.film.R;
-import com.example.kelvin_pc.film.View.BaseActivity;
-
-import org.w3c.dom.Text;
+import com.example.kelvin_pc.film.Model.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Rated extends BaseActivity {
 

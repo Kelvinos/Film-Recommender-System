@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="26dp"
         android:layout_weight="0.87"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:id="@+id/layout_sort">
 
         <TextView
             android:layout_width="wrap_content"
@@ -80,6 +81,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
 
         <LinearLayout
             android:orientation="horizontal"

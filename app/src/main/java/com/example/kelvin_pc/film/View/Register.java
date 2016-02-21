@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.kelvin_pc.film.Model.BaseActivity;
 import com.example.kelvin_pc.film.R;
 
 public class Register extends BaseActivity {

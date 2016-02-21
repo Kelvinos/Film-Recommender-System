@@ -2,12 +2,9 @@ package com.example.kelvin_pc.film.View;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.example.kelvin_pc.film.Controller.Data_Handler;
+import com.example.kelvin_pc.film.Model.BaseActivity;
 import com.example.kelvin_pc.film.R;
 
 public class Login extends BaseActivity {

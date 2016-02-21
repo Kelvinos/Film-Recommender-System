@@ -1,6 +1,5 @@
 package com.example.kelvin_pc.film.View;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -24,6 +23,7 @@ import com.example.kelvin_pc.film.Controller.AsyncResponse;
 import com.example.kelvin_pc.film.Controller.Debugger;
 import com.example.kelvin_pc.film.Controller.Film_Downloader;
 import com.example.kelvin_pc.film.Controller.Image_Downloader;
+import com.example.kelvin_pc.film.Model.BaseActivity;
 import com.example.kelvin_pc.film.Model.System_Variables;
 import com.example.kelvin_pc.film.Model.Film;
 import com.example.kelvin_pc.film.Model.User;
@@ -34,7 +34,7 @@ import java.util.HashMap;
 
 public class Film_List extends BaseActivity implements AsyncResponse {
 
-    private String genre, release, releaseSort, rating, ratingSort, votes, votesSort;
+    private String genre, release, releaseSort, rating, ratingSort, votes, votesSort, title, category, query;
     private Spinner sort, order;
     private HashMap<String, String> sortByMap;
     private ProgressDialog progress;
@@ -62,7 +62,7 @@ public class Film_List extends BaseActivity implements AsyncResponse {
         generateVariables();
         initSpinners();
         getBundleData();
-        generateFilmQuery();
+        generateFilmQuery(query);
     }
 
     public void generateVariables() {
@@ -94,26 +94,60 @@ public class Film_List extends BaseActivity implements AsyncResponse {
 
     public void getBundleData() {
         Bundle b = getIntent().getExtras();
-        genre = b.getString(getString(R.string.genre));
+        query = b.getString("Query");
+        switch (query) {
+            case "Title":
+                getBundleTitleData(b);
+                break;
+            case "Category":
+                getBundleCategoryData(b);
+                break;
+            case "Discover":
+                getBundleDiscoverData(b);
+                break;
+            default:
+                break;
+        }
+    }
 
+    public void getBundleTitleData(Bundle b) {
+        title = b.getString("Title");
+        LinearLayout l = (LinearLayout) findViewById(R.id.layout_sort);
+        l.setVisibility(LinearLayout.INVISIBLE);
+    }
+
+    public void getBundleCategoryData(Bundle b) {
+        category = b.getString("Category");
+        LinearLayout l = (LinearLayout) findViewById(R.id.layout_sort);
+        l.setVisibility(LinearLayout.INVISIBLE);
+    }
+
+    public void getBundleDiscoverData(Bundle b) {
+        genre = b.getString(getString(R.string.genre));
         release = b.getString(getString(R.string.release_date));
         releaseSort = b.getString(getString(R.string.release_date) + "x");
-
         rating = b.getString(getString(R.string.rating));
         ratingSort = b.getString(getString(R.string.rating) + "x");
-
         votes = b.getString(getString(R.string.vote_count));
         votesSort = b.getString(getString(R.string.vote_count) + "x");
     }
 
-    public void generateFilmQuery() {
+    public void generateFilmQuery(String query) {
         updatePageText();
         updateButtons();
         Film_Downloader fa = new Film_Downloader();
         fa.delegate = this;
-        String sortBy = getSortByString(sort.getSelectedItem().toString());
-        String orderBy = order.getSelectedItem().toString();
-        fa.generateQuery(genre, release, releaseSort, rating, ratingSort, votes, votesSort, sortBy, orderBy, Integer.toString(System_Variables.PAGE_NUMBER));
+
+        String page = Integer.toString(System_Variables.PAGE_NUMBER);
+        if (query.equals("Title")) {
+            fa.generateTitleQuery(title, page);
+        } else if (query.equals("Category")) {
+            fa.generateCategoryQuery(category, page);
+        } else if (query.equals("Discover")) {
+            String sortBy = getSortByString(sort.getSelectedItem().toString());
+            String orderBy = order.getSelectedItem().toString();
+            fa.generateDiscoverQuery(genre, release, releaseSort, rating, ratingSort, votes, votesSort, sortBy, orderBy, page);
+        }
         startProgressBar();
     }
 
@@ -181,17 +215,17 @@ public class Film_List extends BaseActivity implements AsyncResponse {
 
     public void nextPage(View view) {
         System_Variables.PAGE_NUMBER = System_Variables.PAGE_NUMBER+ 1;
-        generateFilmQuery();
+        generateFilmQuery(query);
     }
 
     public void previousPage(View view) {
         if (System_Variables.PAGE_NUMBER != 1)
             System_Variables.PAGE_NUMBER = System_Variables.PAGE_NUMBER - 1;
-        generateFilmQuery();
+        generateFilmQuery(query);
     }
 
     public void refresh(View view) {
-        generateFilmQuery();
+        generateFilmQuery(query);
     }
 
     public void displayNoResults() {

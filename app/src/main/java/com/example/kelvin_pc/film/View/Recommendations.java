@@ -3,7 +3,7 @@ package com.example.kelvin_pc.film.View;
 import android.os.Bundle;
 
 import com.example.kelvin_pc.film.R;
-import com.example.kelvin_pc.film.View.BaseActivity;
+import com.example.kelvin_pc.film.Model.BaseActivity;
 
 public class Recommendations extends BaseActivity {
 

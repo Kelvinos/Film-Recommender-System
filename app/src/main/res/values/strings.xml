@@ -82,13 +82,14 @@
 
     <string-array name="vote_count_array">
         <item>10</item>
+        <item>50</item>
         <item>100</item>
         <item>500</item>
+        <item>750</item>
         <item>1000</item>
+        <item>1500</item>
         <item>2000</item>
-        <item>3000</item>
-        <item>4000</item>
-        <item>5000</item>
+        <item>2500</item>
     </string-array>
 
     <string-array name="greater_lesser_array">
@@ -123,4 +124,5 @@
     <string name="title_activity_recommendations">Suggested</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_description">Description</string>
+    <string name="title_activity_activity_main">activity_main</string>
 </resources>

@@ -26,6 +26,8 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
     private final String RATING = "vote_average";
     private final String VOTE_COUNT = "vote_count";
     private final String SORT_BY = "sort_by=";
+    private final String TITLE_URL = "http://api.themoviedb.org/3/search/movie?query=";
+    private final String CATEGORY_URL = "https://api.themoviedb.org/3/movie/";
 
     private String PAGE = "page=1";
     private final int THRESH = 100;
@@ -71,7 +73,7 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
             pageLimit = pages;
             JSONArray ja = returnedJSON.getJSONArray("results");
             ArrayList<String> ids = new ArrayList<>();
-            for (int i = 0; i < 20; i++) {
+            for (int i = 0; i < ja.length(); i++) {
                 JSONObject jo = ja.getJSONObject(i);
                 ids.add(jo.get("id").toString());
             }
@@ -173,12 +175,12 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
 
     }
 
-    public void generateQuery(String genreVal,
+    public void generateDiscoverQuery(String genreVal,
                               String yearVal, String yearValSort,
                               String ratingVal, String ratingValSort,
                               String votesVal, String votesValSort,
                               String sortBy, String orderBy, String page) {
-        this.PAGE = "page=" + page;
+        updatePage(page);
         String x = BASE_URL +
                 GENRE + getGenreId(genreVal) + "&" +
                 RELEASE_DATE + yearValSort + "=" + yearVal + "&" +
@@ -187,8 +189,26 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
                 SORT_BY + sortBy + "." + orderBy + "&" +
                 PAGE + "&" +
                 KEY;
-        Log.d("myTag", x);
+        new Debugger().print("DISCOVERY QUERY", x);
         this.execute(x);
+    }
+
+    public void generateTitleQuery(String title, String page) {
+        updatePage(page);
+        String x = TITLE_URL + title + "&" + KEY;
+        new Debugger().print("TITLE QUERY", x);
+        this.execute(x);
+    }
+
+    public void generateCategoryQuery(String category, String page) {
+        updatePage(page);
+        String x = CATEGORY_URL + category + "?&" + KEY;
+        new Debugger().print("CATEGORY QUERY", x);
+        this.execute(x);
+    }
+
+    public void updatePage(String page) {
+        this.PAGE = "page=" + page;
     }
 
     public void initGenres() {
@@ -207,13 +227,9 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
         try {
             return genreMap.get(genre);
         } catch (Exception e) {
-            logError(e, "getGenreId");
+            new Debugger().print("GENRE ID", e.toString());
             return "28";
         }
-    }
-
-    public void logError(Exception e, String from) {
-        Log.d("myTag", from + ": " + e.toString());
     }
 
 

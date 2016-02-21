@@ -2,6 +2,7 @@ package com.example.kelvin_pc.film.View;
 
 import android.os.Bundle;
 
+import com.example.kelvin_pc.film.Model.BaseActivity;
 import com.example.kelvin_pc.film.R;
 
 public class Settings extends BaseActivity {

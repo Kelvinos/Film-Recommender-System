@@ -60,6 +60,10 @@
         <activity
             android:name=".View.Description"
             android:label="@string/title_activity_description"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".View.activity_main"
+            android:label="@string/title_activity_activity_main"
             android:theme="@style/AppTheme"></activity>
     </application>
 
