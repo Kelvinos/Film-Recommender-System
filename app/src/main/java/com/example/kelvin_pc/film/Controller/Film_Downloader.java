@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.kelvin_pc.film.Model.Film;
+import com.example.kelvin_pc.film.Model.System_Variables;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,7 +35,6 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
     private movieDetails md = new movieDetails();
     public AsyncResponse delegate = null;
     private HashMap<String, String> genreMap;
-    private static String pageLimit;
 
     public Film_Downloader() {
         initGenres();
@@ -70,7 +70,7 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
         try {
             JSONObject returnedJSON = new JSONObject(result);
             String pages = returnedJSON.get("total_pages").toString();
-            pageLimit = pages;
+            System_Variables.PAGE_THRESH = Integer.parseInt(pages);
             JSONArray ja = returnedJSON.getJSONArray("results");
             ArrayList<String> ids = new ArrayList<>();
             for (int i = 0; i < ja.length(); i++) {
@@ -195,14 +195,14 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
 
     public void generateTitleQuery(String title, String page) {
         updatePage(page);
-        String x = TITLE_URL + title + "&" + KEY;
+        String x = TITLE_URL + title + "&" + PAGE + "&" + KEY;
         new Debugger().print("TITLE QUERY", x);
         this.execute(x);
     }
 
     public void generateCategoryQuery(String category, String page) {
         updatePage(page);
-        String x = CATEGORY_URL + category + "?&" + KEY;
+        String x = CATEGORY_URL + category + "?&" + PAGE + "&" + KEY;
         new Debugger().print("CATEGORY QUERY", x);
         this.execute(x);
     }

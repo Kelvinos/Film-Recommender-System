@@ -60,6 +60,10 @@
                             android:layout_height="1dp"
                             android:background="@android:color/darker_gray"/>
 
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="10dp" />
+
                         <TextView
                             android:id="@+id/text_title"
                             android:layout_width="wrap_content"
@@ -69,7 +73,6 @@
                             android:layout_alignStart="@+id/text_description"
                             android:layout_column="2"
                             android:layout_gravity="center"
-                            android:layout_marginTop="19dp"
                             android:layout_row="0"
                             android:text="Title"
                             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -79,7 +82,7 @@
 
                         <Space
                             android:layout_width="match_parent"
-                            android:layout_height="20dp" />
+                            android:layout_height="10dp" />
                     </LinearLayout>
 
                     <LinearLayout

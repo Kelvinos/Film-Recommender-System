@@ -13,7 +13,7 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
-        android:layout_height="471dp"
+        android:layout_height="470dp"
         android:orientation="vertical"
         android:weightSum="1"
         tools:showIn="@layout/activity_home">
@@ -27,26 +27,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:id="@+id/layout_title"
-                android:onClick="selectTitleView">
+                android:id="@+id/layout_discover">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:weightSum="1">
+                    android:id="@+id/layout_discover_title"
+                    android:onClick="toggleDiscover">
 
-                    <TextView
-                        android:id="@+id/textView19"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="0.04"
-                        android:text="Search by title"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold"
-                        android:typeface="monospace"
-                        android:visibility="visible" />
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Discover"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textStyle="bold"
+                            android:typeface="serif"
+                            android:textSize="20dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="0.04"
+                            android:textAlignment="textStart"
+                            android:visibility="visible"/>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/image_discover_toggle"
+                            android:layout_gravity="right"
+                            android:background="@drawable/icon_minus"/>
+
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
@@ -56,347 +73,432 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <EditText
-                        android:id="@+id/text_title"
-                        android:layout_width="222dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:enabled="true"
-                        android:gravity="center" />
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/layout_category"
-                android:onClick="selectCategoryView">
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/textView29"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="0.04"
-                        android:text="Search by category"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold"
-                        android:typeface="monospace" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@android:color/darker_gray" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:orientation="vertical"
-                        android:id="@+id/radio_group">
-
-                        <RadioButton
-                            android:id="@+id/radio_now_playing"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:checked="false"
-                            android:text="Now Playing" />
-
-                        <RadioButton
-                            android:id="@+id/radio_popular"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:checked="false"
-                            android:text="Popular" />
-
-                        <RadioButton
-                            android:id="@+id/radio_top_rated"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:checked="false"
-                            android:text="Top Rated" />
-
-                        <RadioButton
-                            android:id="@+id/radio_upcoming"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:checked="false"
-                            android:text="Upcoming" />
-                    </RadioGroup>
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:id="@+id/layout_discover"
-                android:onClick="selectDiscoverView">
-
-                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:id="@+id/layout_discover_body"
+                    android:onClick="selectDiscoverView">
 
-                    <TextView
-                        android:id="@+id/textView15"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/textView2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="0.04"
+                            android:text="Genre"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <LinearLayout
+                            android:layout_width="274dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <Spinner
+                                android:id="@+id/spinner_genre"
+                                android:layout_width="104dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_weight="24.24"
+                                android:background="@android:drawable/btn_dropdown"
+                                android:spinnerMode="dropdown" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/textView3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Release Date"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="46dp"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <Spinner
+                                android:id="@+id/spinner_year_end"
+                                android:layout_width="140dp"
+                                android:layout_height="wrap_content"
+                                android:background="@android:drawable/btn_dropdown"
+                                android:spinnerMode="dropdown" />
+
+                            <TextView
+                                android:id="@+id/textView5"
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent"
+                                android:text="-"
+                                android:textAlignment="center"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                            <Spinner
+                                android:id="@+id/spinner_year_start"
+                                android:layout_width="115dp"
+                                android:layout_height="match_parent"
+                                android:background="@android:drawable/btn_dropdown"
+                                android:spinnerMode="dropdown" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_weight="0.04"
-                        android:text="Discover"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold"
-                        android:typeface="monospace" />
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Rating"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <Spinner
+                                android:id="@+id/spinner_rating_end"
+                                android:layout_width="140dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@android:drawable/btn_dropdown"
+                                android:spinnerMode="dropdown" />
+
+                            <TextView
+                                android:id="@+id/textView9"
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_horizontal"
+                                android:text="-"
+                                android:textAlignment="center"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                            <Spinner
+                                android:id="@+id/spinner_rating_start"
+                                android:layout_width="115dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@android:drawable/btn_dropdown"
+                                android:spinnerMode="dropdown"
+                                android:touchscreenBlocksFocus="false" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Vote Count"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="43dp"
+                        android:layout_gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:weightSum="1">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:orientation="horizontal">
+
+                            <Spinner
+                                android:id="@+id/spinner_runtime_end"
+                                android:layout_width="140dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@android:drawable/btn_dropdown"
+                                android:spinnerMode="dropdown" />
+
+                            <TextView
+                                android:id="@+id/text_genre"
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_horizontal"
+                                android:text="-"
+                                android:textAlignment="center"
+                                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                            <Spinner
+                                android:id="@+id/spinner_runtime_start"
+                                android:layout_width="115dp"
+                                android:layout_height="match_parent"
+                                android:background="@android:drawable/btn_dropdown"
+                                android:spinnerMode="dropdown"
+                                android:touchscreenBlocksFocus="false" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/layout_title">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:weightSum="1"
+                    android:id="@+id/layout_title_title"
+                    android:onClick="toggleTitle">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center">
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Search by title"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textStyle="bold"
+                            android:typeface="serif"
+                            android:visibility="visible"
+                            android:textSize="20dp"
+                            android:layout_weight="0.04"
+                            android:textAlignment="textStart" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="match_parent"
+                            android:id="@+id/image_title_toggle"
+                            android:layout_gravity="right"
+                            android:background="@drawable/icon_minus" />
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@android:color/darker_gray" />
+
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_weight="0.04"
-                        android:text="Genre"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="43dp"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="1">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/layout_title_body"
+                    android:onClick="selectTitleView">
 
                     <LinearLayout
-                        android:layout_width="274dp"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:weightSum="1">
 
-                        <Spinner
-                            android:id="@+id/spinner_genre"
-                            android:layout_width="104dp"
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_weight="24.24"
-                            android:background="@android:drawable/btn_dropdown"
-                            android:spinnerMode="dropdown" />
+                            android:layout_gravity="center">
+
+                            <EditText
+                                android:id="@+id/text_title"
+                                android:layout_width="268dp"
+                                android:layout_height="wrap_content"
+                                android:enabled="true"
+                                android:gravity="center"
+                                android:onClick="selectTitleView"
+                                android:singleLine="true"
+                                android:imeOptions="actionDone"/>
+
+                            <ImageButton
+                                android:layout_width="43dp"
+                                android:layout_height="match_parent"
+                                android:id="@+id/image_delete"
+                                android:background="@drawable/icon_delete"
+                                android:visibility="gone" />
+                        </LinearLayout>
                     </LinearLayout>
 
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/layout_category">
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Release Date"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="46dp"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="1">
+                    android:weightSum="1"
+                    android:id="@+id/layout_category_title"
+                    android:onClick="toggleCategory">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                        <Spinner
-                            android:id="@+id/spinner_year_end"
-                            android:layout_width="140dp"
+                        <TextView
+                            android:id="@+id/textView29"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@android:drawable/btn_dropdown"
-                            android:spinnerMode="dropdown" />
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="0.04"
+                            android:text="Search by category"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textStyle="bold"
+                            android:typeface="serif"
+                            android:textSize="20dp"
+                            android:textAlignment="textStart" />
 
-                        <TextView
-                            android:id="@+id/textView5"
-                            android:layout_width="20dp"
+                        <ImageView
+                            android:layout_width="30dp"
                             android:layout_height="match_parent"
-                            android:text="-"
-                            android:textAlignment="center"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <Spinner
-                            android:id="@+id/spinner_year_start"
-                            android:layout_width="115dp"
-                            android:layout_height="match_parent"
-                            android:background="@android:drawable/btn_dropdown"
-                            android:spinnerMode="dropdown" />
-
+                            android:id="@+id/image_category_toggle"
+                            android:layout_gravity="right"
+                            android:background="@drawable/icon_minus" />
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray" />
+
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Rating"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="43dp"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="1">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/layout_category_body"
+                    android:onClick="selectCategoryView">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        android:orientation="vertical"
+                        android:weightSum="1">
 
-                        <Spinner
-                            android:id="@+id/spinner_rating_end"
-                            android:layout_width="140dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@android:drawable/btn_dropdown"
-                            android:spinnerMode="dropdown" />
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="vertical"
+                            android:id="@+id/radio_group">
 
-                        <TextView
-                            android:id="@+id/textView9"
-                            android:layout_width="20dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:text="-"
-                            android:textAlignment="center"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                            <RadioButton
+                                android:id="@+id/radio_now_playing"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:checked="false"
+                                android:text="Now Playing"
+                                android:onClick="selectCategoryView" />
 
-                        <Spinner
-                            android:id="@+id/spinner_rating_start"
-                            android:layout_width="115dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@android:drawable/btn_dropdown"
-                            android:spinnerMode="dropdown"
-                            android:touchscreenBlocksFocus="false" />
+                            <RadioButton
+                                android:id="@+id/radio_popular"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:checked="false"
+                                android:text="Popular"
+                                android:onClick="selectCategoryView" />
 
+                            <RadioButton
+                                android:id="@+id/radio_top_rated"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:checked="false"
+                                android:text="Top Rated"
+                                android:onClick="selectCategoryView" />
+
+                            <RadioButton
+                                android:id="@+id/radio_upcoming"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:checked="false"
+                                android:text="Upcoming"
+                                android:onClick="selectCategoryView" />
+                        </RadioGroup>
                     </LinearLayout>
 
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp" />
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="Vote Count"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="43dp"
-                    android:layout_gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:weightSum="1">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/spinner_runtime_end"
-                            android:layout_width="140dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:background="@android:drawable/btn_dropdown"
-                            android:spinnerMode="dropdown" />
-
-                        <TextView
-                            android:id="@+id/text_genre"
-                            android:layout_width="20dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:text="-"
-                            android:textAlignment="center"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <Spinner
-                            android:id="@+id/spinner_runtime_start"
-                            android:layout_width="115dp"
-                            android:layout_height="match_parent"
-                            android:background="@android:drawable/btn_dropdown"
-                            android:spinnerMode="dropdown"
-                            android:touchscreenBlocksFocus="false" />
-                    </LinearLayout>
-                </LinearLayout>
-
             </LinearLayout>
 
         </LinearLayout>
@@ -404,7 +506,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -413,13 +515,32 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="77dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:onClick="SearchFilms"
-            android:text="Go" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/button4"
+                android:background="@drawable/icon_rng" />
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="SearchFilms"
+                android:background="@drawable/icon_search"
+                android:textAlignment="center" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

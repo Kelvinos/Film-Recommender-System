@@ -81,15 +81,11 @@
     </string-array>
 
     <string-array name="vote_count_array">
-        <item>10</item>
-        <item>50</item>
+        <item>0</item>
         <item>100</item>
+        <item>250</item>
         <item>500</item>
-        <item>750</item>
         <item>1000</item>
-        <item>1500</item>
-        <item>2000</item>
-        <item>2500</item>
     </string-array>
 
     <string-array name="greater_lesser_array">

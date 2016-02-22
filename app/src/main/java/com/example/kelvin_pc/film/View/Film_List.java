@@ -98,9 +98,11 @@ public class Film_List extends BaseActivity implements AsyncResponse {
         switch (query) {
             case "Title":
                 getBundleTitleData(b);
+                removeSortBar();
                 break;
             case "Category":
                 getBundleCategoryData(b);
+                removeSortBar();
                 break;
             case "Discover":
                 getBundleDiscoverData(b);
@@ -110,16 +112,17 @@ public class Film_List extends BaseActivity implements AsyncResponse {
         }
     }
 
+    public void removeSortBar() {
+        LinearLayout l = (LinearLayout) findViewById(R.id.layout_sort);
+        l.setVisibility(LinearLayout.GONE);
+    }
+
     public void getBundleTitleData(Bundle b) {
         title = b.getString("Title");
-        LinearLayout l = (LinearLayout) findViewById(R.id.layout_sort);
-        l.setVisibility(LinearLayout.INVISIBLE);
     }
 
     public void getBundleCategoryData(Bundle b) {
         category = b.getString("Category");
-        LinearLayout l = (LinearLayout) findViewById(R.id.layout_sort);
-        l.setVisibility(LinearLayout.INVISIBLE);
     }
 
     public void getBundleDiscoverData(Bundle b) {
@@ -154,6 +157,8 @@ public class Film_List extends BaseActivity implements AsyncResponse {
     @Override
     public void processFinish(final ArrayList<Film> output) {
         stopProgressBar();
+        updateButtons();
+        updatePageText();
         if (output != null) {
             generateFilmList(output);
         } else {
@@ -199,6 +204,7 @@ public class Film_List extends BaseActivity implements AsyncResponse {
 
     public void updateButtons() {
         Button b = (Button) findViewById(R.id.button_previous);
+        Button k = (Button) findViewById(R.id.button_next);
         if (System_Variables.PAGE_NUMBER == 1) {
             b.setClickable(false);
             b.setVisibility(View.INVISIBLE);
@@ -206,15 +212,24 @@ public class Film_List extends BaseActivity implements AsyncResponse {
             b.setClickable(true);
             b.setVisibility(View.VISIBLE);
         }
+        if (System_Variables.PAGE_NUMBER == System_Variables.PAGE_THRESH) {
+            k.setClickable(false);
+            k.setVisibility(View.INVISIBLE);
+        } else {
+            k.setClickable(true);
+            k.setVisibility(View.VISIBLE);
+        }
     }
 
     public void updatePageText() {
         TextView tv = (TextView) findViewById(R.id.text_page);
-        tv.setText("Page " + System_Variables.PAGE_NUMBER);
+        tv.setText("Page " + System_Variables.PAGE_NUMBER + "/" + System_Variables.PAGE_THRESH);
     }
 
     public void nextPage(View view) {
-        System_Variables.PAGE_NUMBER = System_Variables.PAGE_NUMBER+ 1;
+        if (System_Variables.PAGE_NUMBER != System_Variables.PAGE_THRESH) {
+            System_Variables.PAGE_NUMBER = System_Variables.PAGE_NUMBER+ 1;
+        }
         generateFilmQuery(query);
     }
 
