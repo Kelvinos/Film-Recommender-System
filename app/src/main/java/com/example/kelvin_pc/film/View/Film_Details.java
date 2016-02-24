@@ -23,18 +23,18 @@ public class Film_Details extends BaseActivity {
     private User u;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        setUp(R.layout.activity_film_details);
-        super.onCreate(savedInstanceState);
-        init();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         if (System_Variables.USER.getUpdated()) {
             updateUserRating();
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        setUp(R.layout.activity_film_details);
+        super.onCreate(savedInstanceState);
+        init();
     }
 
     public void init() {
@@ -110,21 +110,17 @@ public class Film_Details extends BaseActivity {
     }
 
     public void updateUserRating() {
-        if (u.ratingExists(film)) {
-            int rating = u.getRating(film);
-            switch (rating) {
-                case -1:
-                    setRatedBad();
-                    break;
-                case 0:
-                    setNoRating();
-                    break;
-                case 1:
-                    setRatedGood();
-                    break;
-            }
-        } else {
-            setNoRating();
+        int rating = u.getRating(film);
+        switch (rating) {
+            case -1:
+                setRatedBad();
+                break;
+            case 0:
+                setNoRating();
+                break;
+            case 1:
+                setRatedGood();
+                break;
         }
     }
 

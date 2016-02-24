@@ -1,19 +1,13 @@
 package com.example.kelvin_pc.film.Controller;
 
-import android.util.Log;
-
 import com.example.kelvin_pc.film.Model.Film;
-import com.example.kelvin_pc.film.Model.System_Variables;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Data_Handler {
 

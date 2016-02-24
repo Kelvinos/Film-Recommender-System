@@ -12,72 +12,84 @@ public class User {
 
     private HashMap<Film, Integer> ratings;
     private boolean updated;
+    private Data_Handler dh;
 
     public User () {
         init();
     }
 
     public void init() {
+        dh = new Data_Handler();
         ratings = new HashMap<>();
         readFromFile();
     }
 
-    public void clearRatings() {
-        ratings.clear();
-        writeToFile();
-        updated = true;
-    }
-
-    public boolean getUpdated() {
-        return this.updated;
-    }
-
-    public void setUpdated(boolean updated) {
-        this.updated = updated;
-    }
-
     public void addRating(Film film, Integer rating) {
         if (rating == -1 || rating == 0 || rating == 1) {
-            if (ratingExists(film)) {
-                Film f = getFilm(film);
-                ratings.put(f, rating);
-            } else {
-                ratings.put(film, rating);
-            }
+            Film f = getFilm(film);
+            ratings.put(f, rating);
+            ratingUpdate();
         }
-        writeToFile();
     }
 
-    public boolean ratingExists(Film film) {
-        for(Film f : ratings.keySet()) {
-            if (f.getId() == film.getId()) {
-                updated = true;
-                return true;
-            }
-        }
-        return false;
+    public void deleteRating(Film film) {
+        Film f = getFilm(film);
+        ratings.remove(f);
+        ratingUpdate();
+    }
+
+    public void clearRatings() {
+        ratings.clear();
+        ratingUpdate();
+    }
+
+    public void ratingUpdate() {
+        updated = true;
+        writeToFile();
     }
 
     public Film getFilm(Film film) {
-        for(Film f : ratings.keySet()) {
-            if (f.getId() == film.getId()) {
-                return f;
+        try {
+            for(Film f : ratings.keySet()) {
+                if (f.getId() == film.getId()) {
+                    return f;
+                }
             }
+        } catch (Exception e) {
+            new Debugger().print("GET FILM", e.toString());
         }
-        return null;
+        return film;
     }
 
     public int getRating(Film film) {
-        for(Film f : ratings.keySet()) {
-            if (f.getId() == film.getId()) {
-                return ratings.get(f);
+        try {
+            for(Film f : ratings.keySet()) {
+                if (f.getId() == film.getId()) {
+                    return ratings.get(f);
+                }
             }
+        } catch (Exception e) {
+            new Debugger().print("GET RATING", e.toString());
         }
+        updated = true;
         return 0;
     }
 
+    public int getGoodRatings() {
+        int count = 0;
+        try {
+            for (Map.Entry<Film, Integer> entry : ratings.entrySet()) {
+                if (entry.getValue() == 1) {
+                    count ++;
+                }
+            }
+        } catch (Exception e) {
+            new Debugger().print("GET GOOD RATING", e.toString());
+        }
+        return count;
+    }
+
     public void readFromFile() {
-        Data_Handler dh = new Data_Handler();
         HashMap<Film, Integer> r = dh.readData();
         if (r != null) {
             this.ratings = r;
@@ -85,12 +97,16 @@ public class User {
     }
 
     public void writeToFile() {
-        Data_Handler dh = new Data_Handler();
         dh.writeData(ratings);
     }
 
     public HashMap<Film, Integer> getRatings() {
         return ratings;
     }
-
+    public boolean getUpdated() {
+        return this.updated;
+    }
+    public void setUpdated(boolean updated) {
+        this.updated = updated;
+    }
 }

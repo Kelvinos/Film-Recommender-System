@@ -42,7 +42,7 @@ public class Film_List extends BaseActivity implements AsyncResponse {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setUp(R.layout.activity_filmlist);
+        setUp(R.layout.activity_film_list);
         super.onCreate(savedInstanceState);
         init();
     }
@@ -292,10 +292,14 @@ public class Film_List extends BaseActivity implements AsyncResponse {
         public void generateColor(final int position) {
             LinearLayout l = (LinearLayout) rowView.findViewById(R.id.layout_row);
             User u = System_Variables.USER;
-            int rating = u.getRating(films.get(position));
-            if (rating == 0) { }
-            if (rating == 1) { l.setBackgroundColor(Color.GREEN); }
-            if (rating == -1) { l.setBackgroundColor(Color.RED); }
+            try {
+                int rating = u.getRating(films.get(position));
+                if (rating == 0) { }
+                if (rating == 1) { l.setBackgroundColor(Color.GREEN); }
+                if (rating == -1) { l.setBackgroundColor(Color.RED); }
+            } catch (Exception e) {
+                new Debugger().print("GENERATE COLOUR", e.toString());
+            }
         }
 
         public void generateTitle(final int position) {

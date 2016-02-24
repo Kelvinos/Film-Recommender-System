@@ -501,14 +501,34 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Space
+                    android:layout_width="fill_parent"
+                    android:layout_height="40px" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/text_error_message"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#ed1220" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/bars">
 
         <View
             android:layout_width="match_parent"
@@ -522,22 +542,12 @@
             android:layout_gravity="center">
 
             <Button
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/button4"
-                android:background="@drawable/icon_rng" />
-
-            <Space
-                android:layout_width="50dp"
-                android:layout_height="match_parent" />
-
-            <Button
                 android:id="@+id/button2"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:onClick="SearchFilms"
-                android:background="@drawable/icon_search"
+                android:text="Go"
                 android:textAlignment="center" />
 
         </LinearLayout>

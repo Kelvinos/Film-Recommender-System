@@ -107,9 +107,9 @@
         <item>asc</item>
     </string-array>
 
-    <string name="help">This application works by suggesting films based on the requirements set by the user. A user can
-    then rate films they like and dislike. Based on these rating the application applies a learning algorithm to suggest
-    films similar to the user\'s interests. These can be found in the account section.</string>
+    <string name="help">This application aims to provide film suggestions based on what you rate. To rate a film, first use the
+    search function. From there, click on a film to expand the view and either rate it good or bad. To view and edit ratings
+    click on the heart. The suggestions will then be calculated and can be viewed by clicking on the light bulb.</string>
 
     <string name="title_activity_login">Login</string>
     <string name="title_activity_register">Register</string>

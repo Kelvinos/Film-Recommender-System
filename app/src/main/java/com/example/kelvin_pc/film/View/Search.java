@@ -1,5 +1,6 @@
 package com.example.kelvin_pc.film.View;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import com.example.kelvin_pc.film.Model.BaseActivity;
 import com.example.kelvin_pc.film.Model.System_Variables;
 import com.example.kelvin_pc.film.Model.User;
@@ -160,6 +163,7 @@ public class Search extends BaseActivity implements AdapterView.OnItemSelectedLi
         title.setCursorVisible(true);
         unselectCategoryLayout();
         unselectDiscoverLayout();
+        displayError("");
     }
 
     public void selectDiscoverView(View view) {
@@ -169,6 +173,7 @@ public class Search extends BaseActivity implements AdapterView.OnItemSelectedLi
         unselectTitleLayout();
         unselectCategoryLayout();
         closeKeyboard();
+        displayError("");
     }
 
     public void selectCategoryView(View view) {
@@ -178,6 +183,7 @@ public class Search extends BaseActivity implements AdapterView.OnItemSelectedLi
         unselectTitleLayout();
         unselectDiscoverLayout();
         closeKeyboard();
+        displayError("");
     }
 
     public void toggleDiscover(View view) {
@@ -257,8 +263,12 @@ public class Search extends BaseActivity implements AdapterView.OnItemSelectedLi
     public void titleQuery() {
         Intent intent = new Intent(this, Film_List.class);
         intent.putExtra("Query", "Title");
-        intent.putExtra("Title", title.getText().toString());
-        startActivity(intent);
+        if(title.getText().toString().equals("")) {
+            displayError("Enter a title.");
+        } else {
+            intent.putExtra("Title", title.getText().toString());
+            startActivity(intent);
+        }
     }
 
     public void categoryQuery() {
@@ -266,8 +276,12 @@ public class Search extends BaseActivity implements AdapterView.OnItemSelectedLi
         intent.putExtra("Query", "Category");
         RadioGroup rg = (RadioGroup) findViewById(R.id.radio_group);
         RadioButton rb = (RadioButton) findViewById(rg.getCheckedRadioButtonId());
-        intent.putExtra("Category", categoryMap.get(rb.getText().toString()));
-        startActivity(intent);
+        if (rb == null) {
+            displayError("Select a category.");
+        } else {
+            intent.putExtra("Category", categoryMap.get(rb.getText().toString()));
+            startActivity(intent);
+        }
     }
 
     public void discoverQuery() {
@@ -281,6 +295,11 @@ public class Search extends BaseActivity implements AdapterView.OnItemSelectedLi
         intent.putExtra(getString(R.string.vote_count), voteCountS.getSelectedItem().toString());
         intent.putExtra(getString(R.string.vote_count) + "x", greaterLesserMap.get(voteCountE.getSelectedItem().toString()));
         startActivity(intent);
+    }
+
+    public void displayError(String error) {
+        TextView textError = (TextView) findViewById(R.id.text_error_message);
+        textError.setText(error);
     }
 
     @Override

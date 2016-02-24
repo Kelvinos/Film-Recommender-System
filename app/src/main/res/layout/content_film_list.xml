@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:showIn="@layout/activity_filmlist"
+    tools:showIn="@layout/activity_film_list"
     android:weightSum="1"
     android:id="@+id/layout_film_list">
 
@@ -33,7 +33,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:weightSum="1"
-                android:id="@+id/layout_sort">
+                android:id="@+id/layout_sort"
+                android:background="@color/bars">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -92,7 +93,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:background="@color/bars">
 
             <View
                 android:layout_width="match_parent"

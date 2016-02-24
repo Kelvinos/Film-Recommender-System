@@ -27,26 +27,47 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:weightSum="1">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Number"
                     android:id="@+id/text_number"
                     android:textAlignment="center"
                     android:layout_gravity="center_horizontal" />
 
-                <TextView
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="234dp"
+                    android:layout_height="match_parent"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Title"
+                        android:id="@+id/text_title"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_horizontal" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Title"
-                    android:id="@+id/text_title"
-                    android:layout_gravity="center_horizontal"
-                    android:textAlignment="center" />
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/button_delete"
+                        android:background="@drawable/icon_cross"
+                        android:layout_gravity="right" />
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

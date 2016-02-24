@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.kelvin_pc.film">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -8,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/octopus"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -17,7 +18,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,45 +26,25 @@
             android:label="Film List"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".View.Login"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".View.Register"
-            android:label="@string/title_activity_register"
-            android:theme="@style/AppTheme" />
-        <activity
             android:name=".View.Settings"
             android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View.Film_Details"
             android:label="@string/title_activity_film_details"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".View.Account"
-            android:label="@string/title_activity_account"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View.Rated"
             android:label="@string/title_activity_rated"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View.Recommendations"
             android:label="@string/title_activity_recommendations"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".View.Profile"
-            android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".View.Description"
             android:label="@string/title_activity_description"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".View.activity_main"
-            android:label="@string/title_activity_activity_main"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

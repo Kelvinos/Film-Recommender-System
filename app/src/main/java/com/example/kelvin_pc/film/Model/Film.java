@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class Film implements Parcelable, Serializable {
 
-    private String title, tag, description, genre, rating, userRating, img, runTime, releaseDate, backdrop;
+    private String title, tag, description, genre, rating, img, runTime, releaseDate, backdrop;
     private int id;
 
     public Film(int id, String title, String tag, String description, String genre, String rating, String img, String runTime, String releaseDate, String backdrop) {
@@ -44,8 +44,6 @@ public class Film implements Parcelable, Serializable {
     public String getTag() { return this.tag; }
     public String getBackdrop() { return this.backdrop; }
 
-    public void setUserRating(String rating) { this.userRating = rating; }
-
     public Film(Parcel in) {
         this.id = in.readInt();
         this.title = in.readString();
@@ -77,7 +75,6 @@ public class Film implements Parcelable, Serializable {
         public Film createFromParcel(Parcel in) {
             return new Film(in);
         }
-
         public Film[] newArray(int size) {
             return new Film[size];
         }

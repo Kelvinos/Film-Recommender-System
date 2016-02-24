@@ -115,7 +115,6 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
         }
 
         public String generateJSON(URL url) {
-            //Log.d("myTag", url.toString());
             try {
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 try {

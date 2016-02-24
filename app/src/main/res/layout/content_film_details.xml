@@ -221,17 +221,18 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/layout_rating_thumbs">
+                android:id="@+id/layout_rating_thumbs"
+                android:background="@color/bars">
 
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal">
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="150dp"
+                        android:layout_width="192dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:id="@+id/view_thumbs_up"
@@ -247,7 +248,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_width="150dp"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:id="@+id/view_thumbs_down"

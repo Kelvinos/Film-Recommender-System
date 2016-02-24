@@ -51,10 +51,10 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
                 recommendations();
                 return true;
             case R.id.action_settings:
-                Settings();
+                settings();
                 return true;
             case R.id.action_home:
-                Home();
+                home();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -71,12 +71,12 @@ public class BaseActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(intent);
     }
 
-    public void Home() {
+    public void home() {
         Intent intent = new Intent(this, Search.class);
         startActivity(intent);
     }
 
-    public void Settings() {
+    public void settings() {
         Intent intent = new Intent(this, Settings.class);
         startActivity(intent);
     }

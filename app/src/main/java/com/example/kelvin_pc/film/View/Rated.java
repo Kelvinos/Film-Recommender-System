@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -31,6 +32,7 @@ public class Rated extends BaseActivity {
     private ListAdapter la;
     private User u;
     private ArrayList<Film> films;
+    private TextView noOverall, noGood, noBad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class Rated extends BaseActivity {
     public void init() {
         generateVariables();
         generateRatings();
+        updateStats();
     }
 
     public void generateVariables() {
@@ -49,9 +52,9 @@ public class Rated extends BaseActivity {
         la = null;
         HashMap<Film, Integer> ratings = u.getRatings();
         films = new ArrayList<>(ratings.keySet());
-        if (System_Variables.ORDER) {
-            Collections.reverse(films);
-        }
+        noOverall = (TextView) findViewById(R.id.text_films_rated);
+        noGood = (TextView) findViewById(R.id.text_good);
+        noBad = (TextView) findViewById(R.id.text_bad);
     }
 
     public void generateRatings() {
@@ -71,16 +74,21 @@ public class Rated extends BaseActivity {
         lv.setAdapter(la);
     }
 
-    public void order(View view) {
-        System_Variables.ORDER = !System_Variables.ORDER;
-        Collections.reverse(films);
-        la.notifyDataSetChanged();
+    public void updateStats() {
+        films = new ArrayList<>(u.getRatings().keySet());
+        int overall = films.size();
+        int good = u.getGoodRatings();
+        int bad = overall - good;
+        noOverall.setText(Integer.toString(overall));
+        noGood.setText(Integer.toString(good));
+        noBad.setText(Integer.toString(bad));
     }
 
     public void clear(View view) {
         User u = System_Variables.USER;
         u.clearRatings();
         la.clear();
+        updateStats();
     }
 
     public class ListAdapter extends ArrayAdapter<Film> {
@@ -95,12 +103,11 @@ public class Rated extends BaseActivity {
             this.films = films;
         }
 
-        public void addItems(ArrayList<Film> films) {
-            this.films = films;
-        }
-
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
+            if (films.size() == 0) {
+                return null;
+            }
             View v = convertView;
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             ratedView = inflater.inflate(R.layout.rated, null);
@@ -112,7 +119,6 @@ public class Rated extends BaseActivity {
 
         public void generateRated(final int position) {
             LinearLayout l = (LinearLayout) ratedView.findViewById(R.id.layout_title);
-            User u = System_Variables.USER;
             int rating = u.getRating(films.get(position));
             if (rating == 0) { }
             if (rating == 1) { l.setBackgroundColor(Color.GREEN); }
@@ -124,6 +130,15 @@ public class Rated extends BaseActivity {
             TextView number = (TextView) ratedView.findViewById(R.id.text_number);
             title.setText(films.get(position).getTitle());
             number.setText(Integer.toString(position + 1));
+            ImageButton im = (ImageButton) ratedView.findViewById(R.id.button_delete);
+            im.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    u.deleteRating(films.get(position));
+                    la.remove(films.get(position));
+                    updateStats();
+                }
+            });
         }
 
         public void generateBackdrop(final int position) {
