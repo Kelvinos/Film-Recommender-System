@@ -7,6 +7,8 @@ public class System_Variables {
     public static int PAGE_NUMBER = 1;
     public static int PAGE_THRESH = 1;
     public static boolean ORDER = false;
+    public static boolean LIST_TOGGLE = true;
+    public static boolean ALPHA_TOGGLE = true;
     public static User USER;
 
 }

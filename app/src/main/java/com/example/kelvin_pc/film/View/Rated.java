@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,6 +27,10 @@ import com.example.kelvin_pc.film.Model.BaseActivity;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 public class Rated extends BaseActivity {
 
@@ -33,6 +38,15 @@ public class Rated extends BaseActivity {
     private User u;
     private ArrayList<Film> films;
     private TextView noOverall, noGood, noBad;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (System_Variables.USER.getUpdated()) {
+            la.notifyDataSetChanged();
+            updateStats();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +99,31 @@ public class Rated extends BaseActivity {
     }
 
     public void clear(View view) {
-        User u = System_Variables.USER;
         u.clearRatings();
         la.clear();
         updateStats();
+    }
+
+    public void toggleSort(View view) {
+        Button b = (Button) findViewById(R.id.button_sort);
+        Map<Film, Integer> sort = new TreeMap<Film, Integer>(u.getRatings());
+        films = new ArrayList<>(sort.keySet());
+
+        if (System_Variables.ALPHA_TOGGLE) {
+            b.setBackgroundResource(R.drawable.icon_alphabetical_opposite_sort);
+        } else {
+            Collections.reverse(films);
+            b.setBackgroundResource(R.drawable.icon_alphabetical_sort);
+        }
+        System_Variables.ALPHA_TOGGLE = !System_Variables.ALPHA_TOGGLE;
+
+        la.clear();
+        la.addAll(films);
+    }
+
+    public void toggleImages(View view) {
+        System_Variables.LIST_TOGGLE = !System_Variables.LIST_TOGGLE;
+        la.notifyDataSetChanged();
     }
 
     public class ListAdapter extends ArrayAdapter<Film> {
@@ -120,9 +155,14 @@ public class Rated extends BaseActivity {
         public void generateRated(final int position) {
             LinearLayout l = (LinearLayout) ratedView.findViewById(R.id.layout_title);
             int rating = u.getRating(films.get(position));
-            if (rating == 0) { }
-            if (rating == 1) { l.setBackgroundColor(Color.GREEN); }
-            if (rating == -1) { l.setBackgroundColor(Color.RED); }
+            if (rating == 0) {
+            }
+            if (rating == 1) {
+                l.setBackgroundColor(Color.GREEN);
+            }
+            if (rating == -1) {
+                l.setBackgroundColor(Color.RED);
+            }
         }
 
         public void generateTitle(final int position) {
@@ -147,6 +187,15 @@ public class Rated extends BaseActivity {
                 new Image_Downloader(image).execute(films.get(position).getBackdrop());
             } catch (Exception e) {
                 new Debugger().print(e.toString());
+            }
+            LinearLayout l = (LinearLayout) ratedView.findViewById(R.id.layout_backdrop);
+            Button b = (Button) findViewById(R.id.button_list);
+            if (System_Variables.LIST_TOGGLE) {
+                l.setVisibility(View.GONE);
+                b.setBackgroundResource(R.drawable.icon_list_pictures);
+            } else {
+                l.setVisibility(View.VISIBLE);
+                b.setBackgroundResource(R.drawable.icon_list);
             }
         }
 

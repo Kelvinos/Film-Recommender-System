@@ -6,7 +6,7 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 
-public class Film implements Parcelable, Serializable {
+public class Film implements Parcelable, Serializable, Comparable {
 
     private String title, tag, description, genre, rating, img, runTime, releaseDate, backdrop;
     private int id;
@@ -83,5 +83,11 @@ public class Film implements Parcelable, Serializable {
     @Override
     public int describeContents() {
         return 0;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Film f = (Film) o;
+        return this.title.compareTo(f.getTitle());
     }
 }
