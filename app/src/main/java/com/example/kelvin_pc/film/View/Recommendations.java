@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.example.kelvin_pc.film.Controller.AsyncResponse;
 import com.example.kelvin_pc.film.Controller.Debugger;
 import com.example.kelvin_pc.film.Controller.Film_Downloader;
+import com.example.kelvin_pc.film.Controller.Maths_Handler;
 import com.example.kelvin_pc.film.Model.Film;
 import com.example.kelvin_pc.film.Model.System_Variables;
 import com.example.kelvin_pc.film.Model.User;
@@ -24,6 +25,7 @@ public class Recommendations extends BaseActivity implements AsyncResponse {
     private User user;
     private HashMap<Film, Integer> ratings;
     private Matrix xtr, xts, ytr, yts;
+    private Maths_Handler mh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,30 +42,28 @@ public class Recommendations extends BaseActivity implements AsyncResponse {
     public void initVariables() {
         user = System_Variables.USER;
         ratings = user.getRatings();
+        mh = new Maths_Handler();
     }
 
     public void initSuggestions() {
-        if (ratings.size() < 20) {
-            displayError();
-        }
         generateTrainingData();
         generateTestData();
     }
 
     public void generateTrainingData() {
         ArrayList<Film> ratedFilms = new ArrayList<>(ratings.keySet());
+
         xtr = new Matrix(ratedFilms.size(), 3);
-        generateMatrix(xtr, ratedFilms);
+        xtr = mh.generateMatrix(xtr, ratedFilms);
 
         ytr = new Matrix(ratedFilms.size(), 1);
-        generateLabels(ytr, ratedFilms);
+        ytr = mh.generateLabels(ytr, ratedFilms, ratings);
 
         new Debugger().printMatrix("TRAINING", xtr);
         new Debugger().printMatrix("LABELS", ytr);
     }
 
     public void generateTestData() {
-        // 100 Popular films
         Film_Downloader fd = new Film_Downloader();
         fd.delegate = this;
         fd.generateCategoryQuery("popular", Integer.toString(1));
@@ -72,33 +72,19 @@ public class Recommendations extends BaseActivity implements AsyncResponse {
     @Override
     public void processFinish(ArrayList<Film> films) {
         xts = new Matrix(20, 3);
-        generateMatrix(xts, films);
+        xts = mh.generateMatrix(xts, films);
+        yts = mh.KNN(xtr, ytr, xts, 1);
+
         new Debugger().printMatrix("TEST", xts);
-
+        new Debugger().printMatrix("LABELS", yts);
     }
 
-    public void generateMatrix(Matrix m, ArrayList<Film> films) {
-        for (int i=0; i<m.getRowDimension(); i++) {
-            Film f = films.get(i);
-            m.set(i, 0, Double.parseDouble(f.getRating()));
-            m.set(i, 1, Double.parseDouble(f.getRunTime()));
-            m.set(i, 2, Double.parseDouble(f.getReleaseDate().substring(0, 4)));
-        }
-    }
-
-    public void generateLabels(Matrix m, ArrayList<Film> films) {
-        for (int i=0; i<m.getRowDimension(); i++) {
-            Film f = films.get(i);
-            Double label =  1.0 * ratings.get(f);
-            m.set(i, 0, label);
-        }
-    }
 
     public void displayError() {
         TextView t = (TextView) findViewById(R.id.text_error_recommendation);
         ListView l = (ListView) findViewById(R.id.list_recommendations);
         l.setVisibility(View.GONE);
-        t.setText("No suggestions." + "\n" +  "Must have rated at least 10 good films and 10 bad films.");
+        t.setText(R.string.suggestions_invalid);
     }
 
 }

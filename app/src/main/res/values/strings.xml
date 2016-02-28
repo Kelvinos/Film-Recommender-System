@@ -107,6 +107,9 @@
         <item>asc</item>
     </string-array>
 
+
+    <string name="suggestions_invalid"> "No suggestions." "\n" "Must have rated at least 10 good films and 10 bad films." </string>
+
     <string name="help">This application aims to provide film suggestions based on what you rate. To rate a film, first use the
     search function. From there, click on a film to expand the view and either rate it good or bad. To view and edit ratings
     click on the heart. The suggestions will then be calculated and can be viewed by clicking on the light bulb.</string>
