@@ -53,15 +53,8 @@
                             android:textSize="20dp"
                             android:layout_gravity="center_horizontal"
                             android:layout_weight="0.04"
-                            android:textAlignment="textStart"
+                            android:textAlignment="center"
                             android:visibility="visible"/>
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"
-                            android:id="@+id/image_discover_toggle"
-                            android:layout_gravity="right"
-                            android:background="@drawable/icon_minus"/>
 
                     </LinearLayout>
 
@@ -76,8 +69,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/layout_discover_body"
-                    android:onClick="selectDiscoverView">
+                    android:id="@+id/layout_discover_body">
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -328,14 +320,8 @@
                             android:visibility="visible"
                             android:textSize="20dp"
                             android:layout_weight="0.04"
-                            android:textAlignment="textStart" />
+                            android:textAlignment="center" />
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"
-                            android:id="@+id/image_title_toggle"
-                            android:layout_gravity="right"
-                            android:background="@drawable/icon_minus" />
                     </LinearLayout>
 
                     <View
@@ -349,8 +335,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/layout_title_body"
-                    android:onClick="selectTitleView">
+                    android:id="@+id/layout_title_body">
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -370,7 +355,6 @@
                                 android:layout_height="wrap_content"
                                 android:enabled="true"
                                 android:gravity="center"
-                                android:onClick="selectTitleView"
                                 android:singleLine="true"
                                 android:imeOptions="actionDone"/>
 
@@ -420,14 +404,8 @@
                             android:textStyle="bold"
                             android:typeface="serif"
                             android:textSize="20dp"
-                            android:textAlignment="textStart" />
+                            android:textAlignment="center" />
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"
-                            android:id="@+id/image_category_toggle"
-                            android:layout_gravity="right"
-                            android:background="@drawable/icon_minus" />
                     </LinearLayout>
 
                     <View
@@ -441,8 +419,7 @@
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/layout_category_body"
-                    android:onClick="selectCategoryView">
+                    android:id="@+id/layout_category_body">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -463,8 +440,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:checked="false"
-                                android:text="Now Playing"
-                                android:onClick="selectCategoryView" />
+                                android:text="Now Playing" />
 
                             <RadioButton
                                 android:id="@+id/radio_popular"
@@ -472,8 +448,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:checked="false"
-                                android:text="Popular"
-                                android:onClick="selectCategoryView" />
+                                android:text="Popular" />
 
                             <RadioButton
                                 android:id="@+id/radio_top_rated"
@@ -481,8 +456,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:checked="false"
-                                android:text="Top Rated"
-                                android:onClick="selectCategoryView" />
+                                android:text="Top Rated" />
 
                             <RadioButton
                                 android:id="@+id/radio_upcoming"
@@ -490,8 +464,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:checked="false"
-                                android:text="Upcoming"
-                                android:onClick="selectCategoryView" />
+                                android:text="Upcoming" />
                         </RadioGroup>
                     </LinearLayout>
 

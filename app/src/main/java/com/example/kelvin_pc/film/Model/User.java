@@ -11,7 +11,6 @@ import java.util.Map;
 public class User {
 
     private HashMap<Film, Integer> ratings;
-    private boolean updated;
     private Data_Handler dh;
 
     public User () {
@@ -44,7 +43,6 @@ public class User {
     }
 
     public void ratingUpdate() {
-        updated = true;
         writeToFile();
     }
 
@@ -71,7 +69,6 @@ public class User {
         } catch (Exception e) {
             new Debugger().print("GET RATING", e.toString());
         }
-        updated = true;
         return 0;
     }
 
@@ -102,11 +99,5 @@ public class User {
 
     public HashMap<Film, Integer> getRatings() {
         return ratings;
-    }
-    public boolean getUpdated() {
-        return this.updated;
-    }
-    public void setUpdated(boolean updated) {
-        this.updated = updated;
     }
 }

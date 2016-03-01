@@ -19,17 +19,14 @@ import android.widget.TextView;
 import com.example.kelvin_pc.film.Controller.Debugger;
 import com.example.kelvin_pc.film.Controller.Image_Downloader;
 import com.example.kelvin_pc.film.Model.Film;
-import com.example.kelvin_pc.film.Model.System_Variables;
+import com.example.kelvin_pc.film.Model.System.System_Variables;
 import com.example.kelvin_pc.film.Model.User;
 import com.example.kelvin_pc.film.R;
-import com.example.kelvin_pc.film.Model.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 public class Rated extends BaseActivity {
@@ -42,10 +39,7 @@ public class Rated extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if (System_Variables.USER.getUpdated()) {
-            la.notifyDataSetChanged();
-            updateStats();
-        }
+        update();
     }
 
     @Override
@@ -58,7 +52,7 @@ public class Rated extends BaseActivity {
     public void init() {
         generateVariables();
         generateRatings();
-        updateStats();
+        update();
     }
 
     public void generateVariables() {
@@ -81,6 +75,7 @@ public class Rated extends BaseActivity {
                 Bundle b = new Bundle();
                 b.putParcelable("film", films.get(position));
                 intent.putExtras(b);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
         });
@@ -88,7 +83,7 @@ public class Rated extends BaseActivity {
         lv.setAdapter(la);
     }
 
-    public void updateStats() {
+    public void update() {
         films = new ArrayList<>(u.getRatings().keySet());
         int overall = films.size();
         int good = u.getGoodRatings();
@@ -96,12 +91,13 @@ public class Rated extends BaseActivity {
         noOverall.setText(Integer.toString(overall));
         noGood.setText(Integer.toString(good));
         noBad.setText(Integer.toString(bad));
+        la.clear();
+        la.addAll(films);
     }
 
     public void clear(View view) {
         u.clearRatings();
-        la.clear();
-        updateStats();
+        update();
     }
 
     public void toggleSort(View view) {
@@ -176,7 +172,7 @@ public class Rated extends BaseActivity {
                 public void onClick(View v) {
                     u.deleteRating(films.get(position));
                     la.remove(films.get(position));
-                    updateStats();
+                    update();
                 }
             });
         }

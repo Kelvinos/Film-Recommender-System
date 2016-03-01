@@ -14,22 +14,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/view2" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="41dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="39dp" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

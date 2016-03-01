@@ -13,6 +13,14 @@
     </item>
 
     <item
+        android:id="@+id/action_film"
+        android:orderInCategory="200"
+        android:title="Film"
+        android:icon="@drawable/icon_film"
+        app:showAsAction="always">
+    </item>
+
+    <item
         android:id="@+id/action_rated"
         android:orderInCategory="200"
         android:title="Rated"
@@ -33,7 +41,7 @@
         android:orderInCategory="300"
         android:title="Settings"
         android:icon="@drawable/icon_settings_color"
-        app:showAsAction="always">
+        app:showAsAction="ifRoom">
     </item>
 
 </menu>

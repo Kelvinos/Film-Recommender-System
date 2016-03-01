@@ -3,7 +3,6 @@ package com.example.kelvin_pc.film.View;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.kelvin_pc.film.Model.BaseActivity;
 import com.example.kelvin_pc.film.R;
 
 public class Description extends BaseActivity {
@@ -19,7 +18,7 @@ public class Description extends BaseActivity {
 
     public void init() {
         getBundleData();
-        updateDescription();
+        generateDescription();
     }
 
     public void getBundleData() {
@@ -27,9 +26,9 @@ public class Description extends BaseActivity {
         description = b.getString("Description");
     }
 
-    public void updateDescription() {
-        TextView tv = (TextView) findViewById(R.id.text_description);
-        tv.setText(description);
+    public void generateDescription() {
+        TextView t = textView(R.id.text_description);
+        t.setText(description);
     }
 
 }

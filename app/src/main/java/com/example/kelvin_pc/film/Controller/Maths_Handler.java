@@ -3,16 +3,41 @@ package com.example.kelvin_pc.film.Controller;
 import com.example.kelvin_pc.film.Model.Film;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.HashMap;
 
 import Jama.Matrix;
 
-public class Maths_Handler {
+public class Maths_Handler  {
 
-    public void Maths_Handler() {
+    private Matrix xtr, xts, ytr, yts;
+    private HashMap<Film, Integer> ratings;
 
+    public Maths_Handler(HashMap<Film, Integer> ratings) {
+        this.ratings = ratings;
+    }
+
+    public void generateTrainingData() {
+        ArrayList<Film> ratedFilms = new ArrayList<>(ratings.keySet());
+
+        xtr = new Matrix(ratedFilms.size(), 3);
+        xtr = generateMatrix(xtr, ratedFilms);
+
+        ytr = new Matrix(ratedFilms.size(), 1);
+        ytr = generateLabels(ytr, ratedFilms, ratings);
+
+        new Debugger().printMatrix("TRAINING", xtr);
+        new Debugger().printMatrix("LABELS", ytr);
+    }
+
+    public Matrix generateTestData(ArrayList<Film> films) {
+        xts = new Matrix(20, 3);
+        xts = generateMatrix(xts, films);
+        yts = KNN(xtr, ytr, xts, 1);
+
+        new Debugger().printMatrix("TEST", xts);
+        new Debugger().printMatrix("LABELS", yts);
+
+        return yts;
     }
 
     public Matrix generateMatrix(Matrix m, ArrayList<Film> films) {

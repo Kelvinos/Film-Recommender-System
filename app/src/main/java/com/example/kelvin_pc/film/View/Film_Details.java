@@ -8,10 +8,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.kelvin_pc.film.Controller.Debugger;
 import com.example.kelvin_pc.film.Controller.Image_Downloader;
-import com.example.kelvin_pc.film.Model.BaseActivity;
-import com.example.kelvin_pc.film.Model.System_Variables;
+import com.example.kelvin_pc.film.Model.System.System_Variables;
 import com.example.kelvin_pc.film.Model.Film;
 import com.example.kelvin_pc.film.Model.User;
 import com.example.kelvin_pc.film.R;
@@ -25,9 +23,7 @@ public class Film_Details extends BaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if (System_Variables.USER.getUpdated()) {
-            updateUserRating();
-        }
+        updateUserRating();
     }
 
     @Override
@@ -44,8 +40,8 @@ public class Film_Details extends BaseActivity {
     }
 
     public void generateVariables() {
-        g = (LinearLayout) findViewById(R.id.view_thumbs_up);
-        b = (LinearLayout) findViewById(R.id.view_thumbs_down);
+        g = linearLayout(R.id.view_thumbs_up);
+        b = linearLayout(R.id.view_thumbs_down);
         u = System_Variables.USER;
     }
 
@@ -66,62 +62,43 @@ public class Film_Details extends BaseActivity {
     }
 
     public void generateTitle() {
-        TextView title = (TextView) findViewById(R.id.text_title);
+        TextView title = textView(R.id.text_title);
         title.setText(film.getTitle());
     }
 
     public void generateDescription() {
-        TextView description = (TextView) findViewById(R.id.text_description);
-        String desc = film.getDescription();
+        TextView desc = textView(R.id.text_description);
+        String d = film.getDescription();
         int thresh = System_Variables.DESC_THRESH;
-        if (desc.length() > thresh) {
-            desc = desc.substring(0, thresh) + " ...";
+        if (d.length() > thresh) {
+            d = d.substring(0, thresh) + " ...";
         }
-        description.setText(desc);
+        desc.setText(d);
     }
 
     public void generateRating() {
-        TextView rating = (TextView) findViewById(R.id.text_rating);
+        TextView rating = textView(R.id.text_rating);
         rating.setText(film.getRating());
     }
 
     public void generateGenre() {
-        TextView genre = (TextView) findViewById(R.id.text_genre);
+        TextView genre = textView(R.id.text_genre);
         genre.setText(film.getGenre());
     }
 
     public void generateRuntime() {
-        TextView runtime = (TextView) findViewById(R.id.text_runtime);
+        TextView runtime = textView(R.id.text_runtime);
         runtime.setText(film.getRunTime());
     }
 
     public void generateReleaseDate() {
-        TextView releaseDate = (TextView) findViewById(R.id.text_year);
+        TextView releaseDate = textView(R.id.text_year);
         releaseDate.setText(film.getReleaseDate());
     }
 
     public void generatePoster() {
-        final ImageView image = (ImageView) findViewById(R.id.image_poster);
-        try {
-            new Image_Downloader(image).execute(film.getBackdrop());
-        } catch (Exception e) {
-            new Debugger().print(e.toString());
-        }
-    }
-
-    public void updateUserRating() {
-        int rating = u.getRating(film);
-        switch (rating) {
-            case -1:
-                setRatedBad();
-                break;
-            case 0:
-                setNoRating();
-                break;
-            case 1:
-                setRatedGood();
-                break;
-        }
+        final ImageView image = imageView(R.id.image_poster);
+        new Image_Downloader(image).execute(film.getBackdrop());
     }
 
     public void setRatedGood() {
@@ -135,8 +112,8 @@ public class Film_Details extends BaseActivity {
     }
 
     public void setNoRating() {
-        g.setBackgroundColor(getResources().getColor(R.color.transparent));
-        b.setBackgroundColor(getResources().getColor(R.color.transparent));
+        g.setBackgroundResource(R.color.transparent);
+        b.setBackgroundResource(R.color.transparent);
     }
 
     public void RateGood(View view) {
@@ -154,4 +131,20 @@ public class Film_Details extends BaseActivity {
         intent.putExtra("Description", film.getDescription());
         startActivity(intent);
     }
+
+    public void updateUserRating() {
+        int rating = u.getRating(film);
+        switch (rating) {
+            case -1:
+                setRatedBad();
+                break;
+            case 0:
+                setNoRating();
+                break;
+            case 1:
+                setRatedGood();
+                break;
+        }
+    }
+
 }

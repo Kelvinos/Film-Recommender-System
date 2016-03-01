@@ -1,10 +1,9 @@
 package com.example.kelvin_pc.film.Controller;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.kelvin_pc.film.Model.Film;
-import com.example.kelvin_pc.film.Model.System_Variables;
+import com.example.kelvin_pc.film.Model.System.System_Variables;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
