@@ -4,6 +4,8 @@ package com.example.kelvin_pc.film.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.kelvin_pc.film.Controller.Debugger;
+
 import java.io.Serializable;
 
 public class Film implements Parcelable, Serializable, Comparable {
@@ -25,24 +27,45 @@ public class Film implements Parcelable, Serializable, Comparable {
         this.backdrop = backdrop;
     }
 
-    public int getId() { return this.id; }
-    public String getRunTime() { return this.runTime; }
+    public int getId() {
+        return this.id;
+    }
+
+    public String getRunTime() {
+        return this.runTime;
+    }
+
     public String getTitle() {
         return this.title;
     }
+
     public String getDescription() {
         return this.description;
     }
+
     public String getRating() {
         return this.rating;
     }
+
     public String getGenre() {
         return this.genre;
     }
-    public String getImg() { return  this.img; }
-    public String getReleaseDate() { return this.releaseDate; }
-    public String getTag() { return this.tag; }
-    public String getBackdrop() { return this.backdrop; }
+
+    public String getImg() {
+        return this.img;
+    }
+
+    public String getReleaseDate() {
+        return this.releaseDate;
+    }
+
+    public String getTag() {
+        return this.tag;
+    }
+
+    public String getBackdrop() {
+        return this.backdrop;
+    }
 
     public Film(Parcel in) {
         this.id = in.readInt();
@@ -75,6 +98,7 @@ public class Film implements Parcelable, Serializable, Comparable {
         public Film createFromParcel(Parcel in) {
             return new Film(in);
         }
+
         public Film[] newArray(int size) {
             return new Film[size];
         }

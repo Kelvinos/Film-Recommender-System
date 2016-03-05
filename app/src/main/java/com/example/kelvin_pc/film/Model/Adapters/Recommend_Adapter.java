@@ -24,12 +24,14 @@ public class Recommend_Adapter extends ArrayAdapter<Film> {
 
     private final Context context;
     private ArrayList<Film> films;
+    private ArrayList<Double> weights;
     private View rowView;
 
-    public Recommend_Adapter(Context context, ArrayList<Film> films) {
+    public Recommend_Adapter(Context context, ArrayList<Film> films, ArrayList<Double> weights) {
         super(context, R.layout.row, films);
         this.context = context;
         this.films = films;
+        this.weights = weights;
     }
 
     public void addItems(ArrayList<Film> films) {
@@ -41,11 +43,12 @@ public class Recommend_Adapter extends ArrayAdapter<Film> {
         if (films != null) {
             View v = convertView;
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView = inflater.inflate(R.layout.row, null);
+            rowView = inflater.inflate(R.layout.recommended, null);
             try {
                 generateColor(position);
                 generateTitle(position);
                 generateTag(position);
+                generateWeighting(position);
                 generateImage(position);
             } catch (Exception e) {
                 new Debugger().print(e.toString());
@@ -87,6 +90,16 @@ public class Recommend_Adapter extends ArrayAdapter<Film> {
         tag.setText(tagString);
     }
 
+    public void generateWeighting(final int position) {
+        TextView weighting = (TextView) rowView.findViewById(R.id.text_weight);
+        Double weight = round(weights.get(position), 2);
+        weighting.setText(weight.toString());
+        if (weight < 1.0 && System_Variables.USER.getRating(films.get(position)) == 0) {
+            LinearLayout layout = (LinearLayout) rowView.findViewById(R.id.layout_row);
+            layout.setBackgroundColor(Color.YELLOW);
+        }
+    }
+
     public void generateImage(final int position) {
         final ImageView image = (ImageView) rowView.findViewById(R.id.image_poster);
         try {
@@ -94,6 +107,15 @@ public class Recommend_Adapter extends ArrayAdapter<Film> {
         } catch (Exception e) {
             new Debugger().print(e.toString());
         }
+    }
+
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
     }
 
 }

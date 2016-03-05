@@ -100,6 +100,7 @@ public class Search extends BaseActivity implements AdapterView.OnItemSelectedLi
     public void initView() {
         toggleOff();
         toggleDiscover(null);
+        delete.setVisibility(View.GONE);
     }
 
     public void toggleDiscover(View view) {

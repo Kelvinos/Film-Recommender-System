@@ -30,7 +30,7 @@ public class Maths_Handler  {
     }
 
     public Matrix generateTestData(ArrayList<Film> films) {
-        xts = new Matrix(20, 3);
+        xts = new Matrix(films.size(), 3);
         xts = generateMatrix(xts, films);
         yts = KNN(xtr, ytr, xts, 1);
 
@@ -43,9 +43,16 @@ public class Maths_Handler  {
     public Matrix generateMatrix(Matrix m, ArrayList<Film> films) {
         for (int i=0; i<m.getRowDimension(); i++) {
             Film f = films.get(i);
-            m.set(i, 0, Double.parseDouble(f.getRating()));
-            m.set(i, 1, Double.parseDouble(f.getRunTime()));
-            m.set(i, 2, Double.parseDouble(f.getReleaseDate().substring(0, 4)));
+            try {
+                m.set(i, 0, Double.parseDouble(f.getRating()));
+                m.set(i, 1, Double.parseDouble(f.getRunTime()));
+                for (int j=0; j<20; j++) {
+
+                }
+                m.set(i, 2, Double.parseDouble(f.getReleaseDate().substring(0, 4)));
+            } catch (Exception e) {
+                new Debugger().print("GENERATE MATRIX", e.toString());
+            }
         }
         return m;
     }
@@ -73,8 +80,8 @@ public class Maths_Handler  {
         int xtrRow = xtr.getRowDimension();
         int xtsRow = xts.getRowDimension();
 
-        // Create a matrix for the y test labels
-        Matrix yts = new Matrix(xtsRow, 1);
+        // Create a matrix for the y test labels and the weight
+        Matrix yts = new Matrix(xtsRow, 2);
 
         // For each film recommendation
         for (int i=0; i<xtsRow; i++) {
@@ -121,6 +128,9 @@ public class Maths_Handler  {
 
             // Assign the label to the film recommendation whether it is good or bad
             yts.set(i, 0, smallestLabel);
+
+            // Assign the weight of the label
+            yts.set(i, 1, smallest);
 
         }
 

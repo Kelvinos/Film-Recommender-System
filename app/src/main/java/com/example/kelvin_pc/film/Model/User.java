@@ -2,9 +2,7 @@ package com.example.kelvin_pc.film.Model;
 
 import com.example.kelvin_pc.film.Controller.Data_Handler;
 import com.example.kelvin_pc.film.Controller.Debugger;
-import com.example.kelvin_pc.film.Model.Film;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -87,14 +85,14 @@ public class User {
     }
 
     public void readFromFile() {
-        HashMap<Film, Integer> r = dh.readData();
+        HashMap<Film, Integer> r = dh.readRatings();
         if (r != null) {
             this.ratings = r;
         }
     }
 
     public void writeToFile() {
-        dh.writeData(ratings);
+        dh.writeRatings(ratings);
     }
 
     public HashMap<Film, Integer> getRatings() {

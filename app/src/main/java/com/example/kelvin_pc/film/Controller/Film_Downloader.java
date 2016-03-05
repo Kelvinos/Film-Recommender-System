@@ -128,7 +128,8 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
                     br.close();
                     return sb.toString();
                 } catch (Exception d) {
-                    new Debugger().print("GENERATE JSON 1", d.toString());
+                    int status = con.getResponseCode();
+                    new Debugger().print("GENERATE JSON 1", d.toString() + " " + Integer.toString(status));
                     return null;
                 } finally {
                     con.disconnect();
