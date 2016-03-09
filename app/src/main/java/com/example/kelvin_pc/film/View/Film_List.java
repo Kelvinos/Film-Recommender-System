@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.kelvin_pc.film.Controller.AsyncResponse;
+import com.example.kelvin_pc.film.Controller.Debugger;
 import com.example.kelvin_pc.film.Controller.Film_Downloader;
 import com.example.kelvin_pc.film.Model.Adapters.Film_List_Adapter;
 import com.example.kelvin_pc.film.Model.Film;
@@ -26,6 +27,7 @@ public class Film_List extends BaseActivity implements AsyncResponse {
     private Spinner sort, order;
     private ProgressDialog progress;
     private Film_List_Adapter la;
+    private ListView lv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +43,10 @@ public class Film_List extends BaseActivity implements AsyncResponse {
     @Override
     public void onResume() {
         super.onResume();
-        update();
         if (System_Variables.SEARCH_REQUEST)
             init();
+        if (la != null)
+            la.notifyDataSetChanged();
     }
 
     @Override
@@ -60,6 +63,7 @@ public class Film_List extends BaseActivity implements AsyncResponse {
 
     public void generateVariables() {
         System_Variables.PAGE_NUMBER = 1;
+        lv = listView(R.id.listView);
         progress = new ProgressDialog(this);
         sort = spinner(R.id.spinner_sort_by, R.array.sort_by_array, 0);
         order = spinner(R.id.spinner_order_by, R.array.order_by_array, 0);
@@ -106,15 +110,17 @@ public class Film_List extends BaseActivity implements AsyncResponse {
 
     @Override
     public void processFinish(final ArrayList<Film> output) {
-        if (output != null)
+        if (output.size() != 0) {
             generateFilmList(output);
-        else
+            update();
+        }
+        else {
             showAlert("No results.", "Try changing the search criteria!", this);
+        }
         stopProgressBar(progress);
     }
 
     public void generateFilmList(final ArrayList<Film> films) {
-        final ListView lv = (ListView) findViewById(R.id.listView);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> a, View v, int position,
@@ -135,16 +141,13 @@ public class Film_List extends BaseActivity implements AsyncResponse {
             la.notifyDataSetChanged();
             la.addItems(films);
             la.notifyDataSetChanged();
-            lv.setSelectionAfterHeaderView();
         }
-
     }
 
     public void update() {
-        if (la != null)
-            la.notifyDataSetChanged();
         updateButtons();
         updatePageText();
+        lv.smoothScrollToPosition(0);
     }
 
     public void updateButtons() {
@@ -175,12 +178,14 @@ public class Film_List extends BaseActivity implements AsyncResponse {
         if (System_Variables.PAGE_NUMBER != System_Variables.PAGE_THRESH)
             System_Variables.PAGE_NUMBER = System_Variables.PAGE_NUMBER + 1;
         generateFilmQuery();
+        update();
     }
 
     public void previousPage(View view) {
         if (System_Variables.PAGE_NUMBER != 1)
             System_Variables.PAGE_NUMBER = System_Variables.PAGE_NUMBER - 1;
         generateFilmQuery();
+        update();
     }
 
     public void refresh(View view) {

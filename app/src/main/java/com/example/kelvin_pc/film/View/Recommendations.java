@@ -55,28 +55,30 @@ public class Recommendations extends BaseActivity implements AsyncResponse {
     }
 
     public void getRecommendations() {
-//        mh.generateTrainingData();
-//        Data_Handler dh = new Data_Handler();
-//        ArrayList<Film> films = dh.readFilms();
-//        if (films == null) {
-//            new Debugger().print("!");
-//        }
-//        Matrix labels = mh.generateTestData(films);
-////        ArrayList<Film> recommendedFilms = new ArrayList<>();
-//        HashMap<Film, Double> recommendedFilms = new HashMap<>();
-//        for (int i=0; i<films.size(); i++) {
-//            // Check if the recommended film label is 1 and that the user hasn't already seen the film
-//            if (labels.get(i, 0) == 1.0 && System_Variables.USER.getRating(films.get(i)) == 0) {
-//                recommendedFilms.put(films.get(i), labels.get(i, 1));
-//                //recommendedFilms.add(films.get(i));
-//            }
-//        }
-//        generateRecommendations(recommendedFilms);
-//        generateTitle(recommendedFilms.size());
+        mh.generateTrainingData();
+        Data_Handler dh = new Data_Handler();
+        ArrayList<Film> films = dh.readFilms();
+        if (films == null) {
+            new Debugger().print("!");
+        } else {
+            new Debugger().print(Integer.toString(films.size()));
+        }
+        Matrix labels = mh.generateTestData(films);
+//        ArrayList<Film> recommendedFilms = new ArrayList<>();
+        HashMap<Film, Double> recommendedFilms = new HashMap<>();
+        for (int i=0; i<films.size(); i++) {
+            // Check if the recommended film label is 1 and that the user hasn't already seen the film
+            if (labels.get(i, 0) == 1.0 && System_Variables.USER.getRating(films.get(i)) == 0) {
+                recommendedFilms.put(films.get(i), labels.get(i, 1));
+                //recommendedFilms.add(films.get(i));
+            }
+        }
+        generateRecommendations(recommendedFilms);
+        generateTitle(recommendedFilms.size());
 
-        Film_Downloader fd = new Film_Downloader();
-        fd.delegate = this;
-        fd.generateCategoryQuery("popular", Integer.toString(page));
+//        Film_Downloader fd = new Film_Downloader();
+//        fd.delegate = this;
+//        fd.generateCategoryQuery("popular", Integer.toString(page));
 
     }
 
@@ -153,11 +155,6 @@ public class Recommendations extends BaseActivity implements AsyncResponse {
         TextView title = (TextView) findViewById(R.id.text_number_suggestions);
         title.setText(Integer.toString(size));
     }
-
-//        Film_Downloader fd = new Film_Downloader();
-//        fd.delegate = this;
-//        fd.generateCategoryQuery("popular", Integer.toString(page));
-
 
 
 }

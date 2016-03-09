@@ -37,7 +37,6 @@
     </string-array>
 
     <string-array name="release_date_array">
-        <item>New</item>
         <item>2015</item>
         <item>2014</item>
         <item>2013</item>
@@ -68,8 +67,6 @@
     </string-array>
 
     <string-array name="rating_array">
-        <item>10</item>
-        <item>9</item>
         <item>8</item>
         <item>7</item>
         <item>6</item>

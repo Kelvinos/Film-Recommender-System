@@ -89,9 +89,9 @@ public class Search extends BaseActivity implements AdapterView.OnItemSelectedLi
         discoverLayout = linearLayout(R.id.layout_discover);
         discoverTitleLayout = linearLayout(R.id.layout_discover_title);
         genre = spinner(R.id.spinner_genre, R.array.genre_array, 0);
-        releaseS = spinner(R.id.spinner_year_start, R.array.release_date_array, 27);
+        releaseS = spinner(R.id.spinner_year_start, R.array.release_date_array, 26);
         releaseE = spinner(R.id.spinner_year_end, R.array.greater_lesser_array, 0);
-        ratingS = spinner(R.id.spinner_rating_start, R.array.rating_array, 9);
+        ratingS = spinner(R.id.spinner_rating_start, R.array.rating_array, 7);
         ratingE = spinner(R.id.spinner_rating_end, R.array.greater_lesser_array, 0);
         voteCountS = spinner(R.id.spinner_runtime_start, R.array.vote_count_array, 0);
         voteCountE = spinner(R.id.spinner_runtime_end, R.array.greater_lesser_array, 0);
