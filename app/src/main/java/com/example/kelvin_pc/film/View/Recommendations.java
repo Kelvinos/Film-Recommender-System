@@ -19,7 +19,15 @@ import com.example.kelvin_pc.film.Model.System.System_Variables;
 import com.example.kelvin_pc.film.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import Jama.Matrix;
 
@@ -55,7 +63,9 @@ public class Recommendations extends BaseActivity implements AsyncResponse {
     }
 
     public void getRecommendations() {
+
         mh.generateTrainingData();
+
         Data_Handler dh = new Data_Handler();
         ArrayList<Film> films = dh.readFilms();
         if (films == null) {
@@ -63,23 +73,19 @@ public class Recommendations extends BaseActivity implements AsyncResponse {
         } else {
             new Debugger().print(Integer.toString(films.size()));
         }
+
         Matrix labels = mh.generateTestData(films);
-//        ArrayList<Film> recommendedFilms = new ArrayList<>();
+
         HashMap<Film, Double> recommendedFilms = new HashMap<>();
         for (int i=0; i<films.size(); i++) {
             // Check if the recommended film label is 1 and that the user hasn't already seen the film
             if (labels.get(i, 0) == 1.0 && System_Variables.USER.getRating(films.get(i)) == 0) {
                 recommendedFilms.put(films.get(i), labels.get(i, 1));
-                //recommendedFilms.add(films.get(i));
             }
         }
+
         generateRecommendations(recommendedFilms);
         generateTitle(recommendedFilms.size());
-
-//        Film_Downloader fd = new Film_Downloader();
-//        fd.delegate = this;
-//        fd.generateCategoryQuery("popular", Integer.toString(page));
-
     }
 
     @Override
@@ -123,8 +129,10 @@ public class Recommendations extends BaseActivity implements AsyncResponse {
     }
 
     public void generateRecommendations(final HashMap<Film, Double> recFilms) {
-        final ArrayList<Film> films = new ArrayList<>(recFilms.keySet());
-        final ArrayList<Double> weights = new ArrayList<>(recFilms.values());
+        final Map<Film, Double> sorted = sortByValues(recFilms);
+        final ArrayList<Film> films = new ArrayList<>(sorted.keySet());
+        final ArrayList<Double> weights = new ArrayList<>(sorted.values());
+
         final ListView lv = (ListView) findViewById(R.id.listView);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -156,5 +164,6 @@ public class Recommendations extends BaseActivity implements AsyncResponse {
         title.setText(Integer.toString(size));
     }
 
-
 }
+
+

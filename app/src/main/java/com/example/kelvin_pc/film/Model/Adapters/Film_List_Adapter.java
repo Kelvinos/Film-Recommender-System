@@ -40,29 +40,48 @@ public class Film_List_Adapter extends ArrayAdapter<Film> {
         View v = convertView;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         rowView = inflater.inflate(R.layout.row, null);
-        generateColor(position);
-        generateTitle(position);
-        generateTag(position);
-        generateImage(position);
+
+        try {
+            generateColor(position);
+        } catch (Exception e) {
+            new Debugger().print("GENERATE COLOUR", e.toString());
+        }
+
+        try {
+            generateTitle(position);
+        } catch (Exception e) {
+            new Debugger().print("GENERATE TITLE", e.toString());
+        }
+
+        try {
+            generateTag(position);
+        } catch (Exception e) {
+            new Debugger().print("GENERATE TAG", e.toString());
+        }
+
+        try {
+            generateImage(position);
+        } catch (Exception e) {
+            new Debugger().print("GENERATE IMAGE", e.toString());
+        }
+
         return rowView;
     }
 
     public void generateColor(final int position) {
         LinearLayout l = (LinearLayout) rowView.findViewById(R.id.layout_row);
         User u = System_Variables.USER;
-        try {
-            int rating = u.getRating(films.get(position));
-            if (rating == 0) {
-            }
-            if (rating == 1) {
-                l.setBackgroundColor(Color.GREEN);
-            }
-            if (rating == -1) {
-                l.setBackgroundColor(Color.RED);
-            }
-        } catch (Exception e) {
-            new Debugger().print("GENERATE COLOUR", e.toString());
+
+        int rating = u.getRating(films.get(position));
+        if (rating == 0) {
         }
+        if (rating == 1) {
+            l.setBackgroundColor(Color.GREEN);
+        }
+        if (rating == -1) {
+            l.setBackgroundColor(Color.RED);
+        }
+
     }
 
     public void generateTitle(final int position) {

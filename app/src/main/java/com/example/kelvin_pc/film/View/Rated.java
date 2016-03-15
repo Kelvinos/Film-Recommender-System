@@ -84,15 +84,13 @@ public class Rated extends BaseActivity {
     }
 
     public void update() {
-        films = new ArrayList<>(u.getRatings().keySet());
-        int overall = films.size();
+        int overall = new ArrayList<>(u.getRatings().keySet()).size();
         int good = u.getGoodRatings();
         int bad = overall - good;
         noOverall.setText(Integer.toString(overall));
         noGood.setText(Integer.toString(good));
         noBad.setText(Integer.toString(bad));
-        la.clear();
-        la.addAll(films);
+        sort();
     }
 
     public void clear(View view) {
@@ -101,18 +99,21 @@ public class Rated extends BaseActivity {
     }
 
     public void toggleSort(View view) {
-        Button b = (Button) findViewById(R.id.button_sort);
+        System_Variables.ALPHA_TOGGLE = !System_Variables.ALPHA_TOGGLE;
+        sort();
+    }
+
+    public void sort() {
         Map<Film, Integer> sort = new TreeMap<Film, Integer>(u.getRatings());
         films = new ArrayList<>(sort.keySet());
-
-        if (System_Variables.ALPHA_TOGGLE) {
-            b.setBackgroundResource(R.drawable.icon_alphabetical_opposite_sort);
-        } else {
-            Collections.reverse(films);
+        Collections.reverse(films);
+        Button b = (Button) findViewById(R.id.button_sort);
+        if (!System_Variables.ALPHA_TOGGLE) {
             b.setBackgroundResource(R.drawable.icon_alphabetical_sort);
+        } else {
+            b.setBackgroundResource(R.drawable.icon_alphabetical_opposite_sort);
+            Collections.reverse(films);
         }
-        System_Variables.ALPHA_TOGGLE = !System_Variables.ALPHA_TOGGLE;
-
         la.clear();
         la.addAll(films);
     }

@@ -3,6 +3,7 @@ package com.example.kelvin_pc.film.Controller;
 import com.example.kelvin_pc.film.Model.Film;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import Jama.Matrix;
@@ -19,7 +20,7 @@ public class Maths_Handler  {
     public void generateTrainingData() {
         ArrayList<Film> ratedFilms = new ArrayList<>(ratings.keySet());
 
-        xtr = new Matrix(ratedFilms.size(), 3);
+        xtr = new Matrix(ratedFilms.size(), 23);
         xtr = generateMatrix(xtr, ratedFilms);
 
         ytr = new Matrix(ratedFilms.size(), 1);
@@ -30,7 +31,7 @@ public class Maths_Handler  {
     }
 
     public Matrix generateTestData(ArrayList<Film> films) {
-        xts = new Matrix(films.size(), 3);
+        xts = new Matrix(films.size(), 23);
         xts = generateMatrix(xts, films);
         yts = KNN(xtr, ytr, xts, 1);
 
@@ -46,15 +47,36 @@ public class Maths_Handler  {
             try {
                 m.set(i, 0, Double.parseDouble(f.getRating()));
                 m.set(i, 1, Double.parseDouble(f.getRunTime()));
-                for (int j=0; j<20; j++) {
-
-                }
                 m.set(i, 2, Double.parseDouble(f.getReleaseDate().substring(0, 4)));
+                // Set the genres
+                // 3-22 [20 genres]
+                String genreList = f.getGenre();
+                String[] splitList = genreList.split(", ");
+                Double[] genreBinary = getGenreBinary(splitList);
+                for (int j=0; j<20; j++) {
+                    m.set(i, 3+j, genreBinary[j]);
+                }
             } catch (Exception e) {
                 new Debugger().print("GENERATE MATRIX", e.toString());
             }
         }
         return m;
+    }
+
+    public Double[] getGenreBinary(String[] genres) {
+        Double[] genreBinary = new Double[20];
+        String[] allGenres = {"Action", "Adventure", "Animation", "Comedy", "Crime", "Documentary", "Drama",
+                "Family", "Fantasy", "Foreign", "History", "Horror", "Music", "Mystery", "Romance", "Science Fiction",
+                "TV Movie", "Thriller", "War", "Western"};
+        Arrays.fill(genreBinary, 0.0);
+        for (int i=0; i<allGenres.length; i++) {
+            for (int j=0; j<genres.length; j++) {
+                if (genres[j].equals(allGenres[i])) {
+                    genreBinary[i] = 1.0;
+                }
+            }
+        }
+        return genreBinary;
     }
 
     public Matrix generateLabels(Matrix m, ArrayList<Film> films, HashMap<Film, Integer> ratings) {

@@ -76,6 +76,7 @@ public class Film_Downloader extends AsyncTask<String, Void, String> implements 
                 JSONObject jo = ja.getJSONObject(i);
                 ids.add(jo.get("id").toString());
             }
+            new Debugger().print(Integer.toString(ids.size()));
             md.delegate = this;
             md.execute(ids);
         } catch (Exception e) {

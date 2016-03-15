@@ -105,7 +105,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:id="@+id/button_sort"
-                android:background="@drawable/icon_alphabetical_sort"
+                android:background="@drawable/icon_alphabetical_opposite_sort"
                 android:onClick="toggleSort" />
 
             <Space

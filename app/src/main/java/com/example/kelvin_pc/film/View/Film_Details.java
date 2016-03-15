@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.kelvin_pc.film.Controller.Debugger;
 import com.example.kelvin_pc.film.Controller.Image_Downloader;
 import com.example.kelvin_pc.film.Model.System.System_Variables;
 import com.example.kelvin_pc.film.Model.Film;

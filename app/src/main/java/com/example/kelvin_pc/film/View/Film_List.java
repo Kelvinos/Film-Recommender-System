@@ -133,15 +133,10 @@ public class Film_List extends BaseActivity implements AsyncResponse {
                 startActivity(intent);
             }
         });
-        if (la == null) {
-            la = new Film_List_Adapter(this, films);
-            lv.setAdapter(la);
-        } else {
-            la.addItems(new ArrayList<Film>());
-            la.notifyDataSetChanged();
-            la.addItems(films);
-            la.notifyDataSetChanged();
-        }
+
+        la = new Film_List_Adapter(this, films);
+        lv.setAdapter(la);
+
     }
 
     public void update() {
